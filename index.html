@@ -108,7 +108,7 @@ h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
   animation: fadeInUp 0.6s ease both;
 }
 .hero h1 {
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-size: clamp(2rem, 7vw, 4.5rem);
   font-weight: 800; line-height: 1.08;
   animation: fadeInUp 0.6s 0.1s ease both;
 }
@@ -165,7 +165,7 @@ h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
 .section { padding: 100px 40px; }
 .section-inner { max-width: 1200px; margin: 0 auto; }
 .section-tag { color: var(--sun); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-.section-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.section-title { font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
 .section-sub { font-size: 1.05rem; color: var(--gray-300); max-width: 600px; line-height: 1.7; }
 
 /* Benefits */
@@ -360,6 +360,8 @@ h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
 .admin-stat-label { font-size: 0.82rem; color: var(--gray-500); margin-top: 4px; }
 .admin-stat-change { font-size: 0.78rem; color: var(--grass); margin-top: 8px; font-weight: 600; }
 .admin-table-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.admin-table-wrap table { min-width: 500px; }
+.admin-table-wrap { overflow-x: auto; }
 .admin-table-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .admin-table-title { font-family: 'Syne', sans-serif; font-weight: 700; }
 table { width: 100%; border-collapse: collapse; }
@@ -396,6 +398,18 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .auth-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 48px; }
 .auth-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
 .auth-sub { color: var(--gray-300); font-size: 0.9rem; margin-bottom: 32px; }
+.code-box {
+  width: 46px; height: 54px;
+  text-align: center; font-size: 1.4rem; font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid var(--border);
+  border-radius: 10px; color: var(--white);
+  outline: none; transition: all 0.2s;
+  caret-color: var(--sun);
+}
+.code-box:focus { border-color: var(--sun); background: rgba(245,166,35,0.08); }
+.code-box.filled { border-color: var(--grass); }
 .auth-switch { text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--gray-300); }
 .auth-switch a { color: var(--sun); text-decoration: none; cursor: pointer; font-weight: 600; }
 
@@ -424,26 +438,357 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ═══ RESPONSIVE ═══ */
+/* ═══ HAMBURGER ═══ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; border-radius: 8px;
+  transition: background 0.2s;
+}
+.hamburger:hover { background: rgba(245,166,35,0.1); }
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ═══ MOBILE MENU ═══ */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1500;
+}
+.mobile-menu-overlay.open { display: block; }
+
+.mobile-menu {
+  position: fixed; top: 0; right: -320px; bottom: 0;
+  width: 300px; max-width: 85vw;
+  background: #0D2035;
+  border-left: 1px solid var(--border);
+  z-index: 1600;
+  display: flex; flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+}
+.mobile-menu.open { right: 0; }
+
+.mobile-menu-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.mobile-menu-close {
+  background: none; border: 1px solid var(--border);
+  color: var(--gray-300); width: 36px; height: 36px;
+  border-radius: 8px; cursor: pointer; font-size: 1rem;
+  transition: all 0.2s;
+}
+.mobile-menu-close:hover { border-color: var(--sun); color: var(--sun); }
+
+.mobile-nav {
+  flex: 1;
+  display: flex; flex-direction: column;
+  padding: 12px 12px;
+  gap: 4px;
+}
+.mobile-nav-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  color: var(--gray-300);
+  font-size: 1rem; font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+.mobile-nav-item:hover, .mobile-nav-item:active {
+  background: rgba(245,166,35,0.08);
+  border-color: rgba(245,166,35,0.15);
+  color: var(--white);
+}
+
+.mobile-menu-footer {
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE — 5 BREAKPOINTS
+   1. Desktop    > 1200px  (default, no query needed)
+   2. Laptop     ≤ 1200px
+   3. Tablet     ≤ 1024px  (iPad, Surface)
+   4. Mobile     ≤ 768px   (large phones)
+   5. Small      ≤ 430px   (iPhone 12/13/14/15, Galaxy S)
+   6. Tiny       ≤ 360px   (older/small androids)
+═══════════════════════════════════════ */
+
+/* ─── 2. LAPTOP (≤1200px) ─────────────── */
+@media (max-width: 1200px) {
+  .section-inner { padding: 0 24px; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .hero h1 { font-size: 3.6rem; }
+}
+
+/* ─── 3. TABLET (≤1024px — iPad, Surface) ── */
+@media (max-width: 1024px) {
+  /* Nav — keep full nav visible on tablet */
+  #nav { padding: 14px 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 0.85rem; }
+
+  /* Hero */
+  .hero { padding: 60px 32px; }
+  .hero h1 { font-size: 3rem; }
+  .hero-visual { width: 42%; }
+  .solar-illustration { width: 380px; height: 300px; }
+  .sol-p1 { width: 160px; height: 105px; }
+  .sol-p2 { width: 160px; height: 105px; left: 200px; }
+  .sol-p3 { width: 160px; height: 105px; left: 120px; top: 160px; }
+  .stats-bar { gap: 24px; }
+
+  /* Section spacing tighter */
+  .section { padding: 72px 32px; }
+  .page-header { padding: 48px 32px 28px; }
+
+  /* 2-col grids stay 2-col but with adjusted min */
+  .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 0 32px 60px; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 0 32px 60px; }
+
+  /* Wraps */
+  .calculator-wrap, .builder-wrap, .appt-wrap,
+  .contact-wrap, .cart-wrap, .dashboard-wrap, .auth-wrap { padding: 0 32px 60px; }
+
+  /* Builder: options + summary side by side, summary narrower */
+  .builder-grid { grid-template-columns: 1fr 260px; gap: 24px; }
+
+  /* Cart */
+  .cart-grid { grid-template-columns: 1fr 280px; gap: 24px; }
+
+  /* Dashboard sidebar narrower */
+  .dash-grid { grid-template-columns: 200px 1fr; gap: 24px; }
+
+  /* Admin */
+  .admin-sidebar { width: 220px; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .admin-main { padding: 24px; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 28px; }
+
+  /* Home calc row */
+  .home-calc-inputs { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .home-calc-inputs button { grid-column: 1 / -1; }
+
+  /* Result grid 3-col on tablet */
+  .result-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Form row stays 2-col on tablet */
+  .form-row { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── 4. MOBILE (≤768px — large phones, small tablet) ── */
 @media (max-width: 768px) {
-  #nav { padding: 14px 20px; }
+  /* ── Nav: hamburger only ── */
+  #nav { padding: 12px 16px; }
+  .hamburger { display: flex; }
   .nav-links { display: none; }
-  .hero { padding: 60px 20px; }
+  .nav-actions { gap: 8px; }
+  .nav-actions .btn-primary { display: none; }
+  .nav-actions .btn-cart { display: none; }
+  .nav-logo { font-size: 1.15rem; }
+  .nav-logo .logo-icon { font-size: 1.35rem; }
+  .btn-cart { padding: 8px 14px; font-size: 0.88rem; }
+
+  /* ── Hero: full width, no illustration ── */
+  .hero { padding: 36px 20px 56px; min-height: auto; flex-direction: column; }
   .hero-visual { display: none; }
-  .section { padding: 60px 20px; }
-  .form-row { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .admin-sidebar { width: 200px; }
-  .admin-stats { grid-template-columns: 1fr 1fr; }
-  .builder-grid { grid-template-columns: 1fr; }
-  .cart-grid { grid-template-columns: 1fr; }
-  .dash-grid { grid-template-columns: 1fr; }
-  .products-grid, .portfolio-grid { padding: 0 20px 60px; }
-  .calculator-wrap, .builder-wrap, .appt-wrap, .contact-wrap, .cart-wrap, .dashboard-wrap, .auth-wrap { padding: 0 20px 60px; }
-  .page-header { padding: 40px 20px 20px; }
-  .stats-bar { gap: 20px; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .hero-content { max-width: 100%; }
+  .hero h1 { font-size: 2.4rem; line-height: 1.1; }
+  .hero p { font-size: 0.98rem; margin: 20px 0 32px; }
+  .hero-badge { font-size: 0.72rem; }
+  .hero-buttons { flex-direction: column; gap: 12px; }
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-outline { width: 100%; text-align: center; padding: 15px 24px; font-size: 0.95rem; }
+  .stats-bar { gap: 0; justify-content: space-between; margin-top: 40px; }
+  .stat-num { font-size: 1.5rem; }
+  .stat-label { font-size: 0.75rem; }
+
+  /* ── Sections ── */
+  .section { padding: 52px 20px; }
+  .section-title { font-size: 1.75rem; }
+  .section-sub { font-size: 0.95rem; }
+  .page-header { padding: 32px 20px 20px; text-align: center; }
+
+  /* ── Grids → 1 col ── */
+  .benefits-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .services-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+  .testimonials-grid { display: none; }
+  .testimonial-carousel { display: block; }
+  .products-grid { grid-template-columns: 1fr; gap: 18px; padding: 0 20px 60px; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 18px; padding: 0 20px 60px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .result-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+  /* ── Wraps / Cards ── */
+  .calculator-wrap, .builder-wrap, .appt-wrap,
+  .contact-wrap, .cart-wrap, .dashboard-wrap,
+  .auth-wrap { padding: 0 20px 60px; }
+  .calc-card, .appt-card, .auth-card { padding: 24px 18px; }
+
+  /* ── Home calc ── */
+  .home-calc-inputs { grid-template-columns: 1fr !important; }
+
+  /* ── Builder ── */
+  .builder-grid { grid-template-columns: 1fr; gap: 20px; }
+  .builder-summary { position: static; }
+  .option-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Cart ── */
+  .cart-grid { grid-template-columns: 1fr; gap: 20px; }
+  .cart-item { flex-wrap: wrap; gap: 12px; }
+  .cart-summary-card { position: static; }
+
+  /* ── Contact ── */
+  .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+
+  /* ── Customer Dashboard ── */
+  .dash-grid { grid-template-columns: 1fr; gap: 0; }
+  .dash-sidebar {
+    flex-direction: row; flex-wrap: nowrap;
+    overflow-x: auto; gap: 8px;
+    padding-bottom: 12px; margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .dash-sidebar::-webkit-scrollbar { display: none; }
+  .dash-nav-item { white-space: nowrap; padding: 9px 16px; font-size: 0.82rem; flex-shrink: 0; }
+
+  /* ── Admin ── */
+  .admin-layout { flex-direction: column; }
+  .admin-sidebar {
+    width: 100%; flex-direction: row; flex-wrap: nowrap;
+    overflow-x: auto; gap: 6px; padding: 12px 16px;
+    border-right: none; border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .admin-sidebar::-webkit-scrollbar { display: none; }
+  .admin-logo { display: none; }
+  .admin-nav-section { display: none; }
+  .admin-nav-item { white-space: nowrap; flex-shrink: 0; padding: 8px 14px; font-size: 0.82rem; border: 1px solid var(--border); border-radius: 20px; }
+  .admin-nav-item.active { border-color: var(--sun); }
+  .admin-main { padding: 20px 16px; overflow-x: hidden; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+  .admin-stat { padding: 16px 14px; }
+  .admin-stat-num { font-size: 1.5rem; }
+  .admin-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+  table { min-width: 520px; font-size: 0.8rem; }
+  th, td { padding: 10px 14px; }
+  .admin-table-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px 16px; }
+
+  /* ── Footer ── */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-brand { grid-column: 1 / -1; }
+  footer { padding: 40px 20px 24px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; font-size: 0.78rem; }
+
+  /* ── Modal ── */
+  .modal-overlay { align-items: flex-end; }
+  .modal {
+    padding: 28px 20px 32px; margin: 0;
+    width: 100%; max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+
+  /* ── Toast ── */
+  .toast-container { right: 12px; left: 12px; bottom: 16px; }
+  .toast { min-width: auto; font-size: 0.85rem; padding: 12px 16px; }
+
+  /* ── Order row ── */
+  .order-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
+
+/* ─── 5. SMALL PHONES (≤430px — iPhone 12/13/14/15, Galaxy S22/S23) ── */
+@media (max-width: 430px) {
+  #nav { padding: 10px 14px; }
+  .hero { padding: 28px 16px 48px; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 0.92rem; margin: 16px 0 28px; }
+  .stats-bar { flex-wrap: wrap; gap: 8px; }
+  .stat-item { min-width: 80px; }
+  .stat-num { font-size: 1.4rem; }
+
+  .section { padding: 40px 16px; }
+  .section-title { font-size: 1.55rem; }
+  .page-header { padding: 28px 16px 16px; }
+
+  .products-grid, .portfolio-grid { padding: 0 16px 48px; }
+  .calculator-wrap, .builder-wrap, .appt-wrap,
+  .contact-wrap, .cart-wrap, .dashboard-wrap,
+  .auth-wrap { padding: 0 16px 48px; }
+  .calc-card, .appt-card, .auth-card { padding: 20px 16px; }
+
+  .result-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .result-val { font-size: 1.5rem; }
+
+  .benefit-card, .service-card { padding: 24px 20px; }
+  .service-num { font-size: 3rem; }
+
+  .admin-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .admin-stat-num { font-size: 1.3rem; }
+
+  .product-footer { flex-direction: column; align-items: stretch; }
+  .qty-selector { justify-content: center; }
+  .btn-add-cart { width: 100%; }
+
+  .cart-item { padding: 14px; }
+  .summary-total { font-size: 1.6rem; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+  .footer-brand { grid-column: auto; }
+
+  .option-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .option-btn { padding: 12px 8px; }
+  .option-label { font-size: 0.75rem; }
+
+  .auth-card { padding: 28px 18px; }
+  .auth-title { font-size: 1.5rem; }
+}
+
+/* ─── 6. TINY PHONES (≤360px — older androids, Galaxy A series) ── */
+@media (max-width: 360px) {
+  .hero h1 { font-size: 1.75rem; }
+  .section-title { font-size: 1.35rem; }
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-outline { font-size: 0.88rem; padding: 13px 20px; }
+  .stat-num { font-size: 1.3rem; }
+  .result-grid { grid-template-columns: 1fr; gap: 10px; }
+  .admin-stats { grid-template-columns: 1fr; gap: 10px; }
+  .nav-logo { font-size: 1rem; }
+  .summary-total { font-size: 1.4rem; }
+  .product-name { font-size: 1.05rem; }
+  .section { padding: 36px 14px; }
+  .calc-card, .appt-card, .auth-card { padding: 18px 14px; }
 }
 
 /* ═══ UTILITY ═══ */
@@ -480,6 +825,9 @@ footer {
     <li><a onclick="showPage('support')">Support</a></li>
     <li><a onclick="showPage('contact')">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
   <div class="nav-actions">
     <button class="btn-cart" onclick="showPage('cart')">🛒 Cart <span class="cart-badge" id="cartBadge">0</span></button>
     <div id="navAuth">
@@ -487,6 +835,37 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <div class="nav-logo">☀️ SolarTex</div>
+    <button class="mobile-menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <nav class="mobile-nav">
+    <a class="mobile-nav-item" onclick="showPage('home');closeMenu()">🏠 Home</a>
+    <a class="mobile-nav-item" onclick="showPage('products');closeMenu()">🔆 Products</a>
+    <a class="mobile-nav-item" onclick="showPage('calculator');closeMenu()">🧮 Calculator</a>
+    <a class="mobile-nav-item" onclick="showPage('builder');closeMenu()">⚙️ System Builder</a>
+    <a class="mobile-nav-item" onclick="showPage('portfolio');closeMenu()">🏗️ Projects</a>
+    <a class="mobile-nav-item" onclick="showPage('support');closeMenu()">💬 Support</a>
+    <a class="mobile-nav-item" onclick="showPage('contact');closeMenu()">📍 Contact</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <!-- Cart button — only shows when cart has items -->
+    <div id="mobileCartBtn" style="display:none;margin-bottom:12px;">
+      <button onclick="showPage('cart');closeMenu()" style="width:100%;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.35);color:var(--white);padding:13px 16px;border-radius:12px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;display:flex;align-items:center;justify-content:space-between;">
+        <span>🛒 View Cart</span>
+        <span id="mobileCartCount" style="background:var(--sun);color:var(--sky);border-radius:50px;padding:2px 10px;font-size:0.8rem;font-weight:800;">0</span>
+      </button>
+    </div>
+    <button class="btn-primary w-full" onclick="showPage('quote');closeMenu()">☀️ Get Free Quote</button>
+    <button class="btn-outline w-full" style="display:block;margin-top:10px;" onclick="showPage('appointment');closeMenu()">📅 Book Appointment</button>
+    <!-- Auth button — Sign In or Account -->
+    <div id="mobileAuthBtn" style="margin-top:10px;"></div>
+  </div>
+</div>
 
 <!-- ═══ TOAST CONTAINER ═══ -->
 <div class="toast-container" id="toastContainer"></div>
@@ -602,10 +981,12 @@ footer {
   </section>
 
   <!-- Testimonials -->
-  <section class="section">
+  <section class="section testimonials-section">
     <div class="section-inner">
       <div class="section-tag">Happy Customers</div>
       <h2 class="section-title">What Houston Says</h2>
+
+      <!-- Desktop/Tablet: normal grid -->
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
@@ -630,6 +1011,134 @@ footer {
             <div class="author-avatar">DK</div>
             <div><div class="author-name">David Kim</div><div class="author-loc">The Woodlands, TX</div></div>
           </div>
+        </div>
+      </div>
+
+      <!-- Mobile: swipeable carousel -->
+      <div class="testimonial-carousel">
+        <div class="testimonial-track" id="testimTrack">
+          <div class="testimonial-slide">
+            <div class="testimonial-quote-icon">"</div>
+            <div class="testimonial-slide-text">SolarTex cut our electricity bill from $380/month to under $30. The install was done in a single day and the team was incredibly professional.</div>
+            <div class="testimonial-slide-footer">
+              <div class="testimonial-slide-stars">★★★★★</div>
+              <div class="testimonial-slide-author">
+                <div class="author-avatar" style="width:38px;height:38px;font-size:0.8rem;">JR</div>
+                <div>
+                  <div class="author-name">James Richardson</div>
+                  <div class="author-loc">Katy, TX · Saved $350/mo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-quote-icon">"</div>
+            <div class="testimonial-slide-text">We went solar for our warehouse and the ROI has been incredible. Saved over $8,000 in the first year alone. Highly recommend SolarTex.</div>
+            <div class="testimonial-slide-footer">
+              <div class="testimonial-slide-stars">★★★★★</div>
+              <div class="testimonial-slide-author">
+                <div class="author-avatar" style="width:38px;height:38px;font-size:0.8rem;">ML</div>
+                <div>
+                  <div class="author-name">Maria Lopez</div>
+                  <div class="author-loc">Sugar Land, TX · Saved $8K/yr</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-quote-icon">"</div>
+            <div class="testimonial-slide-text">Best investment we've ever made in our home. The system paid for itself in 5 years and we've been getting free electricity since. Amazing.</div>
+            <div class="testimonial-slide-footer">
+              <div class="testimonial-slide-stars">★★★★★</div>
+              <div class="testimonial-slide-author">
+                <div class="author-avatar" style="width:38px;height:38px;font-size:0.8rem;">DK</div>
+                <div>
+                  <div class="author-name">David Kim</div>
+                  <div class="author-loc">The Woodlands, TX · 25yr warranty</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Dots -->
+        <div class="carousel-dots" id="testimDots">
+          <div class="carousel-dot active" onclick="goSlide(0)"></div>
+          <div class="carousel-dot" onclick="goSlide(1)"></div>
+          <div class="carousel-dot" onclick="goSlide(2)"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOME CALCULATOR -->
+  <section class="section" style="background: linear-gradient(180deg, var(--sky-mid) 0%, var(--sky) 100%);">
+    <div class="section-inner">
+      <div class="section-tag">Instant Estimate</div>
+      <h2 class="section-title">How Much Will You Save?</h2>
+      <p class="section-sub">Enter your monthly electricity bill and see your savings instantly — no signup needed.</p>
+      <div style="margin-top:48px;background:var(--card-bg);border:1px solid var(--border);border-radius:20px;padding:40px;">
+        <div class="home-calc-inputs" style="display:grid;grid-template-columns:1fr 1fr auto;gap:16px;align-items:flex-end;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Monthly Electric Bill (USD)</label>
+            <input class="form-control" type="number" id="hcBill" placeholder="e.g. 200" oninput="runHomeCalc()" style="font-size:1.1rem;padding:16px 18px;">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Property Type</label>
+            <select class="form-control" id="hcType" onchange="runHomeCalc()" style="font-size:1rem;padding:16px 18px;">
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+            </select>
+          </div>
+          <button class="btn-primary" style="padding:16px 28px;font-size:1rem;white-space:nowrap;" onclick="runHomeCalc()">Calculate ⚡</button>
+        </div>
+        <div id="homeCalcResult" style="display:none;margin-top:36px;">
+          <div style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem;font-weight:600;color:var(--gray-300);">
+              <span>💡 Current Monthly Bill</span><span id="hcCurrentBill" style="color:#FF6B6B;font-weight:700;"></span>
+            </div>
+            <div style="height:13px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">
+              <div style="height:100%;width:100%;background:linear-gradient(90deg,#E53935,#FF7043);border-radius:50px;"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:32px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:0.85rem;font-weight:600;color:var(--gray-300);">
+              <span>☀️ Estimated Bill After Solar</span><span id="hcNewBill" style="color:var(--grass);font-weight:700;"></span>
+            </div>
+            <div style="height:13px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">
+              <div id="hcNewBillBar" style="height:100%;width:10%;background:linear-gradient(90deg,var(--grass),#4CAF50);border-radius:50px;transition:width 1.2s ease;"></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:32px;">
+            <div style="background:rgba(245,166,35,0.08);border:1px solid rgba(245,166,35,0.2);border-radius:14px;padding:20px;text-align:center;">
+              <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--sun);" id="hcSavings">—</div>
+              <div style="font-size:0.78rem;color:var(--gray-300);margin-top:4px;">Monthly Savings</div>
+            </div>
+            <div style="background:rgba(29,185,84,0.08);border:1px solid rgba(29,185,84,0.2);border-radius:14px;padding:20px;text-align:center;">
+              <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--grass);" id="hcYearlySavings">—</div>
+              <div style="font-size:0.78rem;color:var(--gray-300);margin-top:4px;">Yearly Savings</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+              <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--white);" id="hcPayback">—</div>
+              <div style="font-size:0.78rem;color:var(--gray-300);margin-top:4px;">Payback Period</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;">
+              <div style="font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--sun);" id="hc25yr">—</div>
+              <div style="font-size:0.78rem;color:var(--gray-300);margin-top:4px;">25-Year Savings</div>
+            </div>
+          </div>
+          <div style="margin-bottom:28px;">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--gray-500);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">📈 Cumulative Savings Over Time</div>
+            <div id="hcYearBars" style="display:flex;flex-direction:column;gap:7px;"></div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <button class="btn-primary" style="padding:14px 28px;" onclick="showPage('quote')">Get Free Custom Quote →</button>
+            <button class="btn-outline" style="padding:14px 28px;" onclick="showPage('calculator')">Full Calculator</button>
+          </div>
+        </div>
+        <div id="homeCalcPlaceholder" style="text-align:center;padding:40px 0;color:var(--gray-500);">
+          <div style="font-size:3rem;margin-bottom:12px;">⚡</div>
+          <div style="font-size:0.95rem;">Enter your monthly bill above to see your instant savings estimate</div>
         </div>
       </div>
     </div>
@@ -696,9 +1205,25 @@ footer {
         </div>
       </div>
       <div class="calc-result" id="calcResult">
-        <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Your Recommended Solar System</h3>
-        <p style="color:var(--gray-300);font-size:0.9rem;">Based on your inputs, here's what we recommend:</p>
-        <div class="result-grid">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:4px;">Your Recommended Solar System</h3>
+        <p style="color:var(--gray-300);font-size:0.88rem;margin-bottom:24px;">Based on your inputs — here's your full breakdown:</p>
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:7px;font-size:0.83rem;font-weight:600;color:var(--gray-300);">
+            <span>💡 Current Monthly Bill</span><span id="rCurrentBill" style="color:#FF6B6B;font-weight:700;"></span>
+          </div>
+          <div style="height:13px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">
+            <div style="height:100%;width:100%;background:linear-gradient(90deg,#E53935,#FF7043);border-radius:50px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:28px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:7px;font-size:0.83rem;font-weight:600;color:var(--gray-300);">
+            <span>☀️ Estimated Bill After Solar</span><span id="rNewBill" style="color:var(--grass);font-weight:700;"></span>
+          </div>
+          <div style="height:13px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">
+            <div id="rNewBillBar" style="height:100%;width:10%;background:linear-gradient(90deg,var(--grass),#4CAF50);border-radius:50px;transition:width 1.2s ease;"></div>
+          </div>
+        </div>
+        <div class="result-grid" style="margin-bottom:28px;">
           <div class="result-item"><div class="result-val" id="rSystemSize">—</div><div class="result-label">System Size (kW)</div></div>
           <div class="result-item"><div class="result-val" id="rPanels">—</div><div class="result-label">Panels Required</div></div>
           <div class="result-item"><div class="result-val" id="rCost">—</div><div class="result-label">Est. Install Cost</div></div>
@@ -706,7 +1231,11 @@ footer {
           <div class="result-item"><div class="result-val" id="rPayback">—</div><div class="result-label">Payback Period</div></div>
           <div class="result-item"><div class="result-val" id="r25yr">—</div><div class="result-label">25-Year Savings</div></div>
         </div>
-        <button class="btn-primary mt-24" onclick="showPage('quote')">Get Your Custom Quote →</button>
+        <div style="margin-bottom:24px;">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--gray-500);margin-bottom:14px;text-transform:uppercase;letter-spacing:1px;">📈 Cumulative Savings Over Time</div>
+          <div id="rYearBars" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+        <button class="btn-primary mt-8" onclick="showPage('quote')">Get Your Custom Quote →</button>
       </div>
     </div>
   </div>
@@ -915,7 +1444,7 @@ footer {
       <div>
         <div class="contact-info">
           <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-text"><h4>Phone</h4><p>(713) 555-0100</p><p>Mon–Sat, 8am–6pm CT</p></div></div>
-          <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-text"><h4>Email</h4><p>info@solartexhouston.com</p><p>We reply within 24 hours</p></div></div>
+          <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-text"><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e0e7efe6c9fae6e5e8fbfdecf1e1e6fcfafde6e7a7eae6e4">[email&#160;protected]</a></p><p>We reply within 24 hours</p></div></div>
           <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-text"><h4>Office</h4><p>4500 Westheimer Rd, Suite 200</p><p>Houston, TX 77027</p></div></div>
           <div class="contact-item"><div class="contact-icon">💬</div><div class="contact-text"><h4>WhatsApp</h4><p>+1 (713) 555-0100</p><p>Quick support via WhatsApp</p></div></div>
         </div>
@@ -950,11 +1479,19 @@ footer {
     <div class="auth-card">
       <h2 class="auth-title">Welcome Back</h2>
       <p class="auth-sub">Sign in to your SolarTex account</p>
-      <div class="form-group"><label>Email Address</label><input class="form-control" id="loginEmail" type="email" placeholder="your@email.com"></div>
-      <div class="form-group"><label>Password</label><input class="form-control" id="loginPass" type="password" placeholder="••••••••"></div>
-      <button class="btn-primary w-full" style="padding:14px;font-size:1rem;margin-top:8px;" onclick="handleLogin()">Sign In</button>
-      <div class="auth-switch">Don't have an account? <a onclick="showPage('register')">Create one</a></div>
-
+      <div class="form-group"><label>Email or Username</label><input class="form-control" id="loginEmail" placeholder="email or @username"></div>
+      <div class="form-group">
+        <label>Password</label>
+        <div style="position:relative;">
+          <input class="form-control" id="loginPass" type="password" placeholder="••••••••" style="padding-right:48px;">
+          <button onclick="togglePassVis('loginPass',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray-500);cursor:pointer;font-size:1rem;">👁</button>
+        </div>
+      </div>
+      <div style="text-align:right;margin:-12px 0 16px;">
+        <a onclick="showPage('forgot')" style="color:var(--sun);font-size:0.85rem;cursor:pointer;text-decoration:none;">Forgot password?</a>
+      </div>
+      <button class="btn-primary w-full" style="padding:14px;font-size:1rem;" onclick="handleLogin()">Sign In</button>
+      <div class="auth-switch" style="margin-top:20px;">Don't have an account? <a onclick="showPage('register')">Create one</a></div>
     </div>
   </div>
 </div>
@@ -966,14 +1503,94 @@ footer {
       <h2 class="auth-title">Create Account</h2>
       <p class="auth-sub">Join thousands of Houston solar customers</p>
       <div class="form-row">
-        <div class="form-group"><label>First Name</label><input class="form-control" id="regFirst" placeholder="John"></div>
-        <div class="form-group"><label>Last Name</label><input class="form-control" id="regLast" placeholder="Smith"></div>
+        <div class="form-group"><label>First Name *</label><input class="form-control" id="regFirst" placeholder="John"></div>
+        <div class="form-group"><label>Last Name *</label><input class="form-control" id="regLast" placeholder="Smith"></div>
       </div>
-      <div class="form-group"><label>Email Address</label><input class="form-control" id="regEmail" type="email" placeholder="john@email.com"></div>
-      <div class="form-group"><label>Phone</label><input class="form-control" id="regPhone" type="tel" placeholder="+1 (713) 000-0000"></div>
-      <div class="form-group"><label>Password</label><input class="form-control" id="regPass" type="password" placeholder="Min 8 characters"></div>
+      <div class="form-group">
+        <label>Username *</label>
+        <div style="position:relative;">
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gray-500);font-size:1rem;">@</span>
+          <input class="form-control" id="regUsername" placeholder="yourname" style="padding-left:32px;" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')">
+        </div>
+        <span style="font-size:0.75rem;color:var(--gray-500);margin-top:4px;">Letters, numbers, _ and . only</span>
+      </div>
+      <div class="form-group"><label>Email Address *</label><input class="form-control" id="regEmail" type="email" placeholder="john@email.com"></div>
+      <div class="form-group"><label>Phone Number *</label><input class="form-control" id="regPhone" type="tel" placeholder="+1 (713) 000-0000"></div>
+      <div class="form-group">
+        <label>Password *</label>
+        <div style="position:relative;">
+          <input class="form-control" id="regPass" type="password" placeholder="Min 8 characters" style="padding-right:48px;">
+          <button onclick="togglePassVis('regPass',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray-500);cursor:pointer;font-size:1rem;">👁</button>
+        </div>
+      </div>
       <button class="btn-primary w-full" style="padding:14px;font-size:1rem;margin-top:8px;" onclick="handleRegister()">Create Account</button>
-      <div class="auth-switch">Already have an account? <a onclick="showPage('login')">Sign in</a></div>
+      <div class="auth-switch" style="margin-top:16px;">Already have an account? <a onclick="showPage('login')">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FORGOT PASSWORD ═══ -->
+<div class="page" id="page-forgot">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <button onclick="showPage('login')" style="background:none;border:none;color:var(--gray-300);cursor:pointer;font-size:0.85rem;margin-bottom:20px;display:flex;align-items:center;gap:6px;">← Back to Sign In</button>
+      <h2 class="auth-title">Reset Password</h2>
+      <p class="auth-sub">Enter your email or phone number and we'll send a 6-digit verification code.</p>
+      <div id="forgotStep1">
+        <div style="display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <button id="fTabEmail" onclick="switchForgotTab('email')" style="flex:1;padding:12px;background:var(--sun);color:var(--sky);border:none;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:0.88rem;transition:all 0.2s;">📧 Email</button>
+          <button id="fTabPhone" onclick="switchForgotTab('phone')" style="flex:1;padding:12px;background:none;color:var(--gray-300);border:none;font-family:'Syne',sans-serif;font-weight:700;cursor:pointer;font-size:0.88rem;transition:all 0.2s;">📱 Phone</button>
+        </div>
+        <div id="forgotEmailInput" class="form-group">
+          <label>Email Address</label>
+          <input class="form-control" id="forgotEmail" type="email" placeholder="your@email.com">
+        </div>
+        <div id="forgotPhoneInput" class="form-group" style="display:none;">
+          <label>Phone Number</label>
+          <input class="form-control" id="forgotPhone" type="tel" placeholder="+1 (713) 000-0000">
+        </div>
+        <button class="btn-primary w-full" style="padding:14px;font-size:1rem;" onclick="sendVerificationCode()">Send Verification Code</button>
+      </div>
+      <div id="forgotStep2" style="display:none;">
+        <div style="text-align:center;margin-bottom:24px;">
+          <div style="font-size:3rem;margin-bottom:8px;">📬</div>
+          <p style="color:var(--gray-300);font-size:0.9rem;" id="forgotSentMsg">Code sent! Check your email.</p>
+        </div>
+        <div class="form-group">
+          <label>6-Digit Verification Code</label>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:4px;" id="codeInputs">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,0)" onkeydown="codeKey(event,this,0)">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,1)" onkeydown="codeKey(event,this,1)">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,2)" onkeydown="codeKey(event,this,2)">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,3)" onkeydown="codeKey(event,this,3)">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,4)" onkeydown="codeKey(event,this,4)">
+            <input class="code-box" maxlength="1" oninput="codeInput(this,5)" onkeydown="codeKey(event,this,5)">
+          </div>
+          <div style="text-align:center;margin-top:12px;">
+            <a onclick="resendCode()" style="color:var(--sun);font-size:0.82rem;cursor:pointer;" id="resendBtn">Resend code</a>
+            <span id="resendTimer" style="color:var(--gray-500);font-size:0.82rem;display:none;">Resend in <span id="timerCount">60</span>s</span>
+          </div>
+        </div>
+        <button class="btn-primary w-full" style="padding:14px;font-size:1rem;margin-top:8px;" onclick="verifyCode()">Verify Code</button>
+      </div>
+      <div id="forgotStep3" style="display:none;">
+        <div style="text-align:center;margin-bottom:24px;">
+          <div style="font-size:3rem;margin-bottom:8px;">🔐</div>
+          <p style="color:var(--gray-300);font-size:0.9rem;">Code verified! Set your new password.</p>
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <div style="position:relative;">
+            <input class="form-control" id="newPass1" type="password" placeholder="Min 8 characters" style="padding-right:48px;">
+            <button onclick="togglePassVis('newPass1',this)" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray-500);cursor:pointer;font-size:1rem;">👁</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input class="form-control" id="newPass2" type="password" placeholder="Repeat password">
+        </div>
+        <button class="btn-primary w-full" style="padding:14px;font-size:1rem;" onclick="resetPassword()">Reset Password</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1004,6 +1621,20 @@ footer {
         <div class="dash-panel" id="dash-profile">
           <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:24px;">Account Details</h3>
           <div class="appt-card">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding:16px;background:rgba(245,166,35,0.06);border:1px solid rgba(245,166,35,0.15);border-radius:12px;">
+              <div style="width:56px;height:56px;background:var(--sun);color:var(--sky);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;" id="profAvatar">?</div>
+              <div>
+                <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;" id="profDisplayName">—</div>
+                <div style="color:var(--sun);font-size:0.85rem;" id="profDisplayUsername">—</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <div style="position:relative;">
+                <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--gray-500);">@</span>
+                <input class="form-control" id="profUsername" style="padding-left:32px;" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9_.]/g,'')">
+              </div>
+            </div>
             <div class="form-row">
               <div class="form-group"><label>First Name</label><input class="form-control" id="profFirst"></div>
               <div class="form-group"><label>Last Name</label><input class="form-control" id="profLast"></div>
@@ -1181,7 +1812,7 @@ footer {
 </footer>
 
 <!-- ═══ JAVASCRIPT ═══ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══ DATA STORE (localStorage) ═══
 const DB = {
   get: (key, def=[]) => { try { return JSON.parse(localStorage.getItem('st_'+key)) ?? def; } catch { return def; } },
@@ -1258,12 +1889,11 @@ function checkAdmin() {
   return true;
 }
 function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
+  const input = document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass = document.getElementById('loginPass').value;
-  if (!email || !pass) { toast('Please enter your email and password.', 'error'); return; }
-  // Admin
-  if (email === 'admin@solartex.com' && pass === 'admin123') {
-    currentUser = { email, name:'Admin', isAdmin:true };
+  if (!input || !pass) { toast('Please enter your credentials.', 'error'); return; }
+  if (input === 'admin@solartex.com' && pass === 'admin123') {
+    currentUser = { email:input, name:'Admin', username:'admin', isAdmin:true };
     DB.set('currentUser', currentUser);
     updateNavAuth();
     showPage('admin');
@@ -1271,43 +1901,45 @@ function handleLogin() {
     toast('Welcome back, Admin!', 'success');
     return;
   }
-  // Customer
-  const customers = DB.get('customers', []);
   const users = DB.get('users', []);
-  const user = users.find(u => u.email === email && u.pass === pass);
+  const user = users.find(u =>
+    (u.email === input || u.username === input.replace(/^@/,'')) && u.pass === pass
+  );
   if (user) {
     currentUser = user;
     DB.set('currentUser', currentUser);
     updateNavAuth();
     showPage('dashboard');
     renderCustomerDashboard();
-    toast('Welcome back, '+user.first+'!', 'success');
+    toast('Welcome back, '+(user.username ? '@'+user.username : user.first)+'!', 'success');
   } else {
-    toast('Invalid email or password. Try demo@solartex.com / demo123', 'error');
+    toast('Invalid credentials. Check email/username and password.', 'error');
   }
 }
 
 function handleRegister() {
   const first = document.getElementById('regFirst').value.trim();
   const last = document.getElementById('regLast').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
+  const username = document.getElementById('regUsername').value.trim().toLowerCase();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const phone = document.getElementById('regPhone').value.trim();
   const pass = document.getElementById('regPass').value;
-  if (!first || !last || !email || !pass) { toast('Please fill all required fields.', 'error'); return; }
+  if (!first || !last || !username || !email || !pass) { toast('Please fill all required fields.', 'error'); return; }
+  if (pass.length < 8) { toast('Password must be at least 8 characters.', 'error'); return; }
   const users = DB.get('users', []);
   if (users.find(u => u.email === email)) { toast('Email already registered.', 'error'); return; }
-  const newUser = { id:'USR-'+Date.now(), first, last, email, phone, pass, joined: new Date().toISOString().split('T')[0] };
+  if (users.find(u => u.username === username)) { toast('Username @'+username+' is already taken.', 'error'); return; }
+  const newUser = { id:'USR-'+Date.now(), first, last, username, email, phone, pass, joined: new Date().toISOString().split('T')[0] };
   users.push(newUser);
   DB.set('users', users);
-  // Add to customers
   const customers = DB.get('customers', []);
-  customers.push({ id:newUser.id, first, last, email, phone, joined:newUser.joined });
+  customers.push({ id:newUser.id, first, last, username, email, phone, joined:newUser.joined });
   DB.set('customers', customers);
   currentUser = newUser;
   DB.set('currentUser', currentUser);
   updateNavAuth();
   showPage('dashboard');
-  toast('Account created! Welcome to SolarTex, '+first+'!', 'success');
+  toast('Welcome to SolarTex, @'+username+'! 🎉', 'success');
 }
 function handleLogout() {
   currentUser = null;
@@ -1322,11 +1954,13 @@ function updateNavAuth() {
     if (currentUser.isAdmin) {
       navAuth.innerHTML = `<button class="btn-primary" onclick="showPage('admin')">⚙️ Admin</button>`;
     } else {
-      navAuth.innerHTML = `<button class="btn-outline" onclick="showPage('dashboard')">${currentUser.first || 'Dashboard'}</button>`;
+      const displayName = currentUser.username ? '@'+currentUser.username : (currentUser.first || 'Account');
+      navAuth.innerHTML = `<button class="btn-outline" onclick="showPage('dashboard')" style="display:flex;align-items:center;gap:8px;"><span style="width:26px;height:26px;background:var(--sun);color:var(--sky);border-radius:50%;font-size:0.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;">${(currentUser.first||'U')[0].toUpperCase()}</span>${displayName}</button>`;
     }
   } else {
     navAuth.innerHTML = `<button class="btn-primary" onclick="showPage('login')">Sign In</button>`;
   }
+  updateMobileAuth();
 }
 
 // ═══ PRODUCTS ═══
@@ -1375,7 +2009,32 @@ function addToCart(id) {
   if (existing) { existing.qty += qty; } else { cart.push({...product, qty}); }
   DB.set('cart', cart);
   updateCartBadge();
-  toast(`✅ ${qty}× ${product.name} added to cart!`, 'success');
+  showCartPopup(product.name, qty, product.price * qty);
+}
+
+function showCartPopup(name, qty, subtotal) {
+  const existing = document.getElementById('cartPopup');
+  if (existing) existing.remove();
+  const popup = document.createElement('div');
+  popup.id = 'cartPopup';
+  popup.style.cssText = 'position:fixed;bottom:80px;right:20px;left:20px;max-width:360px;margin:0 auto;background:#0D2035;border:1px solid rgba(245,166,35,0.4);border-radius:16px;padding:16px 18px;z-index:3000;box-shadow:0 8px 40px rgba(0,0,0,0.5);animation:slideUp 0.3s ease;';
+  popup.innerHTML = `
+    <style>@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}</style>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">✅</span>
+      <div style="flex:1;">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;">${name}</div>
+        <div style="color:var(--gray-300);font-size:0.82rem;">Qty: ${qty} · $${subtotal.toLocaleString()}</div>
+      </div>
+      <button onclick="document.getElementById('cartPopup').remove()" style="background:none;border:none;color:var(--gray-500);cursor:pointer;font-size:1.2rem;line-height:1;">×</button>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="document.getElementById('cartPopup').remove()" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--white);padding:10px;border-radius:10px;cursor:pointer;font-size:0.85rem;font-weight:600;">Continue Shopping</button>
+      <button onclick="showPage('cart');document.getElementById('cartPopup').remove()" style="flex:1;background:var(--sun);color:var(--sky);border:none;padding:10px;border-radius:10px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;">View Cart 🛒</button>
+    </div>
+  `;
+  document.body.appendChild(popup);
+  setTimeout(() => { if (popup.parentNode) popup.remove(); }, 5000);
 }
 
 function addBuilderToCart() {
@@ -1392,6 +2051,7 @@ function addBuilderToCart() {
 function updateCartBadge() {
   const total = cart.reduce((s,i) => s+i.qty, 0);
   document.getElementById('cartBadge').textContent = total;
+  updateMobileCart();
 }
 
 // ═══ CART ═══
@@ -1499,6 +2159,33 @@ function runCalc() {
   document.getElementById('rSavings').textContent = '$'+Math.round(savings);
   document.getElementById('rPayback').textContent = payback+' yrs';
   document.getElementById('r25yr').textContent = '$'+yr25.toLocaleString();
+  // bill comparison bars
+  const billVal = bill || (usage * 0.12);
+  const newBillVal = Math.round(billVal * 0.10);
+  const elCurrentBill = document.getElementById('rCurrentBill');
+  const elNewBill = document.getElementById('rNewBill');
+  const elNewBillBar = document.getElementById('rNewBillBar');
+  if(elCurrentBill) elCurrentBill.textContent = '$' + Math.round(billVal);
+  if(elNewBill) elNewBill.textContent = '~$' + newBillVal;
+  if(elNewBillBar) setTimeout(()=>{ elNewBillBar.style.width = Math.round((newBillVal/billVal)*100)+'%'; }, 100);
+  // year bars
+  const afterCredit = Math.round(cost * 0.7);
+  const yearlySav = savings * 12;
+  const milestones = [[1,yearlySav],[3,yearlySav*3],[5,yearlySav*5],[10,yearlySav*10],[15,yearlySav*15],[25,yr25+afterCredit]];
+  const maxV = milestones[milestones.length-1][1];
+  const barsEl = document.getElementById('rYearBars');
+  if(barsEl) barsEl.innerHTML = milestones.map(([yr,val])=>{
+    const pct = Math.min(100, Math.round((val/maxV)*100));
+    const color = val >= afterCredit ? 'linear-gradient(90deg,var(--grass),#4CAF50)' : 'linear-gradient(90deg,var(--sun),#FFD07A)';
+    const label = val >= afterCredit ? '✓' : '';
+    return '<div style="display:flex;align-items:center;gap:10px;">'+
+      '<div style="width:48px;font-size:0.75rem;color:var(--gray-500);text-align:right;flex-shrink:0;">Yr '+yr+'</div>'+
+      '<div style="flex:1;height:11px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">'+
+        '<div style="height:100%;width:'+pct+'%;background:'+color+';border-radius:50px;transition:width 1s ease;"></div>'+
+      '</div>'+
+      '<div style="width:72px;font-size:0.75rem;color:var(--white);font-weight:600;">$'+Math.round(val/1000)+'K '+label+'</div>'+
+    '</div>';
+  }).join('');
   result.classList.add('show');
 }
 
@@ -1623,14 +2310,33 @@ function renderCustomerDashboard() {
   document.getElementById('profLast').value = currentUser.last || '';
   document.getElementById('profEmail').value = currentUser.email || '';
   document.getElementById('profPhone').value = currentUser.phone || '';
+  document.getElementById('profUsername').value = currentUser.username || '';
+  const avatar = document.getElementById('profAvatar');
+  if(avatar) avatar.textContent = (currentUser.first||'U')[0].toUpperCase();
+  const dn = document.getElementById('profDisplayName');
+  if(dn) dn.textContent = (currentUser.first||'')+' '+(currentUser.last||'');
+  const du = document.getElementById('profDisplayUsername');
+  if(du) du.textContent = currentUser.username ? '@'+currentUser.username : currentUser.email;
 }
 
 function saveProfile() {
+  const newUsername = document.getElementById('profUsername').value.trim().toLowerCase();
+  const users = DB.get('users',[]);
+  if (newUsername && newUsername !== currentUser.username) {
+    if (users.find(u => u.username === newUsername && u.id !== currentUser.id)) {
+      toast('Username @'+newUsername+' is already taken.', 'error'); return;
+    }
+  }
   currentUser.first = document.getElementById('profFirst').value.trim();
   currentUser.last = document.getElementById('profLast').value.trim();
   currentUser.phone = document.getElementById('profPhone').value.trim();
+  currentUser.username = newUsername;
   DB.set('currentUser', currentUser);
-  toast('Profile updated!', 'success');
+  const idx = users.findIndex(u => u.id === currentUser.id);
+  if(idx !== -1){ users[idx] = {...users[idx], ...currentUser}; DB.set('users', users); }
+  updateNavAuth();
+  renderCustomerDashboard();
+  toast('Profile updated! @'+newUsername, 'success');
 }
 
 function showDashPanel(id, el) {
@@ -1882,21 +2588,279 @@ function toggleFaq(el) {
   if (!wasOpen) { ans.classList.add('open'); el.querySelector('span:last-child').textContent='−'; }
 }
 
+
+// ═══ HOME CALCULATOR ═══
+function runHomeCalc() {
+  const bill = parseFloat(document.getElementById('hcBill').value);
+  const type = document.getElementById('hcType').value;
+  const result = document.getElementById('homeCalcResult');
+  const placeholder = document.getElementById('homeCalcPlaceholder');
+  if (!bill || bill < 1) { result.style.display='none'; placeholder.style.display='block'; return; }
+  const sun = 5.5;
+  const eff = type === 'commercial' ? 0.85 : 0.80;
+  const usage = bill / 0.12;
+  const systemKw = usage / (sun * 30 * eff);
+  const cost = Math.round(systemKw * 3000);
+  const afterCredit = Math.round(cost * 0.7);
+  const newBill = Math.round(bill * 0.10);
+  const monthlySaving = bill - newBill;
+  const yearlySaving = monthlySaving * 12;
+  const payback = (afterCredit / yearlySaving).toFixed(1);
+  const yr25 = Math.round(yearlySaving * 25 - afterCredit);
+  document.getElementById('hcCurrentBill').textContent = '$' + bill.toFixed(0);
+  document.getElementById('hcNewBill').textContent = '~$' + newBill;
+  document.getElementById('hcNewBillBar').style.width = Math.round((newBill/bill)*100) + '%';
+  document.getElementById('hcSavings').textContent = '$' + monthlySaving.toFixed(0);
+  document.getElementById('hcYearlySavings').textContent = '$' + yearlySaving.toLocaleString();
+  document.getElementById('hcPayback').textContent = payback + ' yrs';
+  document.getElementById('hc25yr').textContent = '$' + Math.round(yr25/1000) + 'K';
+  const milestones = [[1, yearlySaving],[3, yearlySaving*3],[5, yearlySaving*5],[10, yearlySaving*10],[15, yearlySaving*15],[25, yr25+afterCredit]];
+  const maxVal = milestones[milestones.length-1][1];
+  document.getElementById('hcYearBars').innerHTML = milestones.map(([yr, val]) => {
+    const pct = Math.min(100, Math.round((val/maxVal)*100));
+    const color = val >= afterCredit ? 'linear-gradient(90deg,var(--grass),#4CAF50)' : 'linear-gradient(90deg,var(--sun),#FFD07A)';
+    const label = val >= afterCredit ? '✓ Paid off' : '';
+    return '<div style="display:flex;align-items:center;gap:10px;">' +
+      '<div style="width:48px;font-size:0.75rem;color:var(--gray-500);text-align:right;flex-shrink:0;">Yr '+yr+'</div>' +
+      '<div style="flex:1;height:11px;background:rgba(255,255,255,0.07);border-radius:50px;overflow:hidden;">' +
+        '<div style="height:100%;width:'+pct+'%;background:'+color+';border-radius:50px;transition:width 1s ease;"></div>' +
+      '</div>' +
+      '<div style="width:80px;font-size:0.75rem;color:var(--white);font-weight:600;">$'+Math.round(val/1000)+'K '+(label||'')+'</div>' +
+    '</div>';
+  }).join('');
+  placeholder.style.display='none';
+  result.style.display='block';
+}
+
+// ═══ MOBILE MENU ═══
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  const btn = document.getElementById('hamburger');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) { closeMenu(); } else {
+    menu.classList.add('open');
+    overlay.classList.add('open');
+    btn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    updateMobileAuth();
+  }
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('mobileMenuOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function updateMobileAuth() {
+  const el = document.getElementById('mobileAuthBtn');
+  if (!el) return;
+  if (currentUser) {
+    if (currentUser.isAdmin) {
+      el.innerHTML = '<button class="btn-outline w-full" style="display:block;" onclick="showPage(\'admin\');closeMenu()">⚙️ Admin Panel</button>';
+    } else {
+      const uname = currentUser.username ? '@'+currentUser.username : currentUser.first;
+      const initial = (currentUser.first||'U')[0].toUpperCase();
+      el.innerHTML = '<button style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--white);padding:13px 16px;border-radius:12px;cursor:pointer;font-size:0.9rem;font-weight:600;display:flex;align-items:center;gap:10px;" onclick="showPage(\'dashboard\');closeMenu()">'
+        + '<span style="width:30px;height:30px;background:var(--sun);color:var(--sky);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;flex-shrink:0;">'+initial+'</span>'
+        + '<span>'+uname+'</span>'
+        + '<span style="margin-left:auto;color:var(--gray-500);font-size:0.75rem;">My Account →</span>'
+        + '</button>';
+    }
+  } else {
+    el.innerHTML = '<button class="btn-primary w-full" style="padding:13px;" onclick="showPage(\'login\');closeMenu()">🔑 Sign In</button>';
+  }
+  updateMobileCart();
+}
+
+function updateMobileCart() {
+  const cartBtn = document.getElementById('mobileCartBtn');
+  const cartCount = document.getElementById('mobileCartCount');
+  if (!cartBtn) return;
+  const total = cart.reduce((s,i) => s+i.qty, 0);
+  if (total > 0) {
+    cartBtn.style.display = 'block';
+    if (cartCount) cartCount.textContent = total + ' item'+(total>1?'s':'');
+  } else {
+    cartBtn.style.display = 'none';
+  }
+}
+
+// ═══ TESTIMONIAL CAROUSEL ═══
+let currentSlide = 0;
+const totalSlides = 3;
+let touchStartX = 0;
+let touchEndX = 0;
+
+function goSlide(n) {
+  currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+  const track = document.getElementById('testimTrack');
+  if (track) track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+  document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
+  });
+}
+
+function initCarousel() {
+  const track = document.getElementById('testimTrack');
+  if (!track) return;
+  // Touch swipe
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0 && currentSlide < totalSlides - 1) goSlide(currentSlide + 1);
+      else if (diff < 0 && currentSlide > 0) goSlide(currentSlide - 1);
+    }
+  }, { passive: true });
+  // Auto advance every 4s
+  setInterval(() => {
+    goSlide(currentSlide < totalSlides - 1 ? currentSlide + 1 : 0);
+  }, 4000);
+}
+
+
+// ═══ FORGOT PASSWORD ═══
+let forgotMode = 'email';
+let generatedCode = '';
+let forgotTarget = '';
+let timerInterval = null;
+
+function switchForgotTab(mode) {
+  forgotMode = mode;
+  document.getElementById('forgotEmailInput').style.display = mode==='email' ? 'flex' : 'none';
+  document.getElementById('forgotPhoneInput').style.display = mode==='phone' ? 'flex' : 'none';
+  document.getElementById('fTabEmail').style.background = mode==='email' ? 'var(--sun)' : 'none';
+  document.getElementById('fTabEmail').style.color = mode==='email' ? 'var(--sky)' : 'var(--gray-300)';
+  document.getElementById('fTabPhone').style.background = mode==='phone' ? 'var(--sun)' : 'none';
+  document.getElementById('fTabPhone').style.color = mode==='phone' ? 'var(--sky)' : 'var(--gray-300)';
+}
+
+function sendVerificationCode() {
+  const val = forgotMode === 'email'
+    ? document.getElementById('forgotEmail').value.trim()
+    : document.getElementById('forgotPhone').value.trim();
+  if (!val) { toast('Please enter your '+forgotMode+'.', 'error'); return; }
+  const users = DB.get('users', []);
+  const found = forgotMode === 'email'
+    ? users.find(u => u.email === val.toLowerCase())
+    : users.find(u => u.phone === val);
+  if (!found) { toast('No account found with that '+forgotMode+'.', 'error'); return; }
+  forgotTarget = found.email;
+  generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+  // Simulate sending — in production connect to real SMS/email API
+  console.log('🔑 Verification code:', generatedCode);
+  document.getElementById('forgotSentMsg').textContent = forgotMode === 'email'
+    ? 'Code sent to '+val+' (demo: check console for code)'
+    : 'Code sent to '+val+' (demo: check console for code)';
+  toast('📬 Code sent! (Demo code: '+generatedCode+')', 'success');
+  document.getElementById('forgotStep1').style.display = 'none';
+  document.getElementById('forgotStep2').style.display = 'block';
+  document.querySelectorAll('.code-box').forEach(b => b.value='');
+  document.querySelectorAll('.code-box')[0].focus();
+  startResendTimer();
+}
+
+function startResendTimer() {
+  let count = 60;
+  document.getElementById('resendBtn').style.display = 'none';
+  document.getElementById('resendTimer').style.display = 'inline';
+  document.getElementById('timerCount').textContent = count;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    count--;
+    document.getElementById('timerCount').textContent = count;
+    if (count <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById('resendBtn').style.display = 'inline';
+      document.getElementById('resendTimer').style.display = 'none';
+    }
+  }, 1000);
+}
+
+function resendCode() {
+  generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+  console.log('🔑 New verification code:', generatedCode);
+  toast('📬 New code sent! (Demo: '+generatedCode+')', 'success');
+  document.querySelectorAll('.code-box').forEach(b => { b.value=''; b.classList.remove('filled'); });
+  document.querySelectorAll('.code-box')[0].focus();
+  startResendTimer();
+}
+
+function codeInput(el, idx) {
+  el.value = el.value.replace(/\D/,'');
+  if (el.value) {
+    el.classList.add('filled');
+    const boxes = document.querySelectorAll('.code-box');
+    if (idx < 5) boxes[idx+1].focus();
+  } else { el.classList.remove('filled'); }
+}
+
+function codeKey(e, el, idx) {
+  if (e.key === 'Backspace' && !el.value && idx > 0) {
+    const boxes = document.querySelectorAll('.code-box');
+    boxes[idx-1].focus();
+    boxes[idx-1].value='';
+    boxes[idx-1].classList.remove('filled');
+  }
+}
+
+function verifyCode() {
+  const boxes = document.querySelectorAll('.code-box');
+  const entered = Array.from(boxes).map(b=>b.value).join('');
+  if (entered.length < 6) { toast('Please enter the full 6-digit code.', 'error'); return; }
+  if (entered === generatedCode) {
+    toast('✅ Code verified!', 'success');
+    document.getElementById('forgotStep2').style.display = 'none';
+    document.getElementById('forgotStep3').style.display = 'block';
+    clearInterval(timerInterval);
+  } else {
+    toast('❌ Wrong code. Try again.', 'error');
+    boxes.forEach(b => { b.style.borderColor='var(--red)'; });
+    setTimeout(() => boxes.forEach(b => { b.style.borderColor=''; b.classList.remove('filled'); b.value=''; }), 1000);
+    boxes[0].focus();
+  }
+}
+
+function resetPassword() {
+  const p1 = document.getElementById('newPass1').value;
+  const p2 = document.getElementById('newPass2').value;
+  if (!p1 || !p2) { toast('Please fill both password fields.', 'error'); return; }
+  if (p1.length < 8) { toast('Password must be at least 8 characters.', 'error'); return; }
+  if (p1 !== p2) { toast('Passwords do not match.', 'error'); return; }
+  const users = DB.get('users', []);
+  const idx = users.findIndex(u => u.email === forgotTarget);
+  if (idx !== -1) {
+    users[idx].pass = p1;
+    DB.set('users', users);
+    toast('🎉 Password reset! Please sign in.', 'success');
+    // Reset all steps
+    document.getElementById('forgotStep1').style.display = 'block';
+    document.getElementById('forgotStep2').style.display = 'none';
+    document.getElementById('forgotStep3').style.display = 'none';
+    generatedCode=''; forgotTarget='';
+    showPage('login');
+  }
+}
+
+function togglePassVis(id, btn) {
+  const inp = document.getElementById(id);
+  if (inp.type === 'password') { inp.type='text'; btn.textContent='🙈'; }
+  else { inp.type='password'; btn.textContent='👁'; }
+}
+
 // ═══ INIT ═══
 initData();
 updateCartBadge();
 updateBuilderSummary();
+updateMobileCart();
 
 // Restore session
 const saved = DB.get('currentUser', null);
 if (saved) { currentUser = saved; updateNavAuth(); }
 
 // Demo login shortcut
+initCarousel();
 DB.get('users', []).length === 0 && (() => {
-  const users = DB.get('users', []);
-  users.push({ id:'USR-DEMO', first:'Demo', last:'Customer', email:'demo@solartex.com', phone:'713-555-0001', pass:'demo123', joined:'2025-01-01' });
-  DB.set('users', users);
-})();
-</script>
-</body>
-</html>
+  const us

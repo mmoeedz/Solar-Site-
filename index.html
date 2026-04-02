@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarTex Houston – Premium Solar Energy Solutions</title>
+<meta name="description" content="SolarTex Houston delivers premium solar panel installation for homes and businesses across Houston, TX. Get a free quote today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sun: #F5A623;
+  --sun-light: #FFD07A;
+  --sun-dark: #D4881E;
+  --sky: #0B1F3A;
+  --sky-mid: #122840;
+  --sky-light: #1A3A5C;
+  --grass: #1DB954;
+  --grass-dim: #148A3D;
+  --white: #F8F9FA;
+  --gray-100: #EEF1F5;
+  --gray-300: #B8C0CC;
+  --gray-500: #6B7A8D;
+  --gray-700: #3D4A5C;
+  --red: #E53935;
+  --card-bg: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sky);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--sky); }
+::-webkit-scrollbar-thumb { background: var(--sun); border-radius: 3px; }
+
+/* ═══ NAV ═══ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(11,31,58,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--sun);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo .logo-icon { font-size: 1.8rem; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { color: var(--gray-300); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; cursor: pointer; }
+.nav-links a:hover { color: var(--sun); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.btn-cart { position: relative; background: none; border: 1px solid var(--border); color: var(--white); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+.btn-cart:hover { border-color: var(--sun); color: var(--sun); }
+.cart-badge { position: absolute; top: -6px; right: -6px; background: var(--sun); color: var(--sky); border-radius: 50%; width: 18px; height: 18px; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.btn-primary { background: var(--sun); color: var(--sky); padding: 10px 22px; border-radius: 10px; border: none; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.btn-primary:hover { background: var(--sun-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245,166,35,0.4); }
+.btn-outline { background: transparent; color: var(--sun); padding: 10px 22px; border-radius: 10px; border: 1px solid var(--sun); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+.btn-outline:hover { background: var(--sun); color: var(--sky); }
+
+/* ═══ PAGES ═══ */
+.page { display: none; min-height: 100vh; padding-top: 80px; }
+.page.active { display: block; }
+
+/* ═══ HERO ═══ */
+#page-home {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(245,166,35,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(29,185,84,0.08) 0%, transparent 50%),
+    var(--sky);
+}
+.hero {
+  min-height: calc(100vh - 80px);
+  display: flex; align-items: center;
+  padding: 80px 40px;
+  position: relative; overflow: hidden;
+}
+.hero-bg-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(245,166,35,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,166,35,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.hero-content { max-width: 620px; position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.3);
+  color: var(--sun); padding: 6px 16px; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease both;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 800; line-height: 1.08;
+  animation: fadeInUp 0.6s 0.1s ease both;
+}
+.hero h1 span { color: var(--sun); }
+.hero p {
+  font-size: 1.15rem; color: var(--gray-300); line-height: 1.7;
+  margin: 24px 0 40px;
+  animation: fadeInUp 0.6s 0.2s ease both;
+}
+.hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.6s 0.3s ease both; }
+.hero-buttons .btn-primary { padding: 16px 32px; font-size: 1rem; }
+.hero-buttons .btn-outline { padding: 16px 32px; font-size: 1rem; }
+.hero-visual {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 50%; height: 100%; display: flex; align-items: center; justify-content: center;
+}
+.solar-illustration {
+  width: 500px; height: 400px; position: relative;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+.sol-panel {
+  position: absolute; border-radius: 8px;
+  background: linear-gradient(135deg, #1a2a4a 0%, #0d1f3a 100%);
+  border: 1px solid rgba(245,166,35,0.2);
+  box-shadow: 0 0 40px rgba(245,166,35,0.1);
+  overflow: hidden;
+}
+.sol-panel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(245,166,35,0.05) 30px, rgba(245,166,35,0.05) 32px);
+}
+.sol-panel::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(180deg, transparent, transparent 30px, rgba(245,166,35,0.05) 30px, rgba(245,166,35,0.05) 32px);
+}
+.sol-p1 { width: 200px; height: 130px; left: 60px; top: 80px; transform: rotate(-8deg); }
+.sol-p2 { width: 200px; height: 130px; left: 250px; top: 60px; transform: rotate(-8deg); }
+.sol-p3 { width: 200px; height: 130px; left: 160px; top: 200px; transform: rotate(-8deg); }
+.sol-sun { position: absolute; right: 30px; top: 20px; width: 80px; height: 80px; background: radial-gradient(circle, #FFD07A, #F5A623); border-radius: 50%; box-shadow: 0 0 60px rgba(245,166,35,0.6); animation: pulse-sun 2s ease-in-out infinite; }
+@keyframes pulse-sun { 0%,100%{box-shadow:0 0 60px rgba(245,166,35,0.6)} 50%{box-shadow:0 0 100px rgba(245,166,35,0.9)} }
+.sol-rays { position: absolute; right: 30px; top: 20px; width: 80px; height: 80px; }
+.stats-bar {
+  display: flex; gap: 40px; margin-top: 60px;
+  animation: fadeInUp 0.6s 0.4s ease both;
+}
+.stat-item {}
+.stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--sun); }
+.stat-label { font-size: 0.85rem; color: var(--gray-500); margin-top: 2px; }
+
+/* ═══ SECTIONS ═══ */
+.section { padding: 100px 40px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-tag { color: var(--sun); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.section-title { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.section-sub { font-size: 1.05rem; color: var(--gray-300); max-width: 600px; line-height: 1.7; }
+
+/* Benefits */
+.benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 60px; }
+.benefit-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+  transition: all 0.3s;
+}
+.benefit-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-4px); background: rgba(245,166,35,0.05); }
+.benefit-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.benefit-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+.benefit-desc { color: var(--gray-300); font-size: 0.92rem; line-height: 1.6; }
+
+/* Services */
+.services-bg { background: linear-gradient(180deg, var(--sky) 0%, var(--sky-mid) 100%); }
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 60px; }
+.service-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 36px; position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--sun), var(--grass)); }
+.service-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,0.2); }
+.service-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: rgba(245,166,35,0.1); position: absolute; top: 16px; right: 24px; line-height: 1; }
+.service-title { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+.service-desc { color: var(--gray-300); font-size: 0.92rem; line-height: 1.6; }
+
+/* Testimonials */
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 60px; }
+.testimonial-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+}
+.testimonial-stars { color: var(--sun); font-size: 1.1rem; margin-bottom: 16px; }
+.testimonial-text { color: var(--gray-300); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 12px; }
+.author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--sun), var(--grass)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--sky); }
+.author-name { font-weight: 600; font-size: 0.95rem; }
+.author-loc { color: var(--gray-500); font-size: 0.8rem; }
+
+/* ═══ PRODUCTS PAGE ═══ */
+.page-header { padding: 60px 40px 40px; text-align: center; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; padding: 0 40px 80px; max-width: 1400px; margin: 0 auto; }
+.product-card {
+  background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: all 0.3s;
+}
+.product-card:hover { transform: translateY(-6px); border-color: rgba(245,166,35,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.product-img { height: 220px; background: linear-gradient(135deg, var(--sky-light), var(--sky-mid)); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; overflow: hidden; }
+.product-img::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(245,166,35,0.04) 28px, rgba(245,166,35,0.04) 30px), repeating-linear-gradient(180deg, transparent, transparent 28px, rgba(245,166,35,0.04) 28px, rgba(245,166,35,0.04) 30px); }
+.product-badge { position: absolute; top: 12px; left: 12px; background: var(--sun); color: var(--sky); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; z-index: 1; }
+.product-body { padding: 24px; }
+.product-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
+.product-capacity { color: var(--sun); font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; }
+.product-desc { color: var(--gray-300); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
+.product-warranty { color: var(--grass); font-size: 0.82rem; font-weight: 500; margin-bottom: 20px; }
+.product-price { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--white); }
+.product-price span { font-size: 0.85rem; color: var(--gray-500); font-family: 'DM Sans', sans-serif; font-weight: 400; }
+.product-footer { display: flex; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.qty-selector { display: flex; align-items: center; gap: 8px; background: var(--sky-mid); border-radius: 8px; padding: 4px; }
+.qty-btn { background: none; border: none; color: var(--sun); width: 28px; height: 28px; cursor: pointer; font-size: 1.1rem; border-radius: 6px; transition: background 0.2s; }
+.qty-btn:hover { background: rgba(245,166,35,0.15); }
+.qty-val { font-family: 'Syne', sans-serif; font-weight: 700; min-width: 24px; text-align: center; }
+.btn-add-cart { flex: 1; background: var(--sun); color: var(--sky); border: none; padding: 12px 16px; border-radius: 10px; font-family: 'Syne', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
+.btn-add-cart:hover { background: var(--sun-light); transform: scale(1.02); }
+
+/* ═══ CALCULATOR ═══ */
+.calculator-wrap { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+.calc-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 48px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.form-group label { font-size: 0.88rem; font-weight: 600; color: var(--gray-300); text-transform: uppercase; letter-spacing: 0.5px; }
+.form-control {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  color: var(--white); padding: 14px 18px; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 1rem;
+  transition: border-color 0.2s; outline: none;
+  width: 100%;
+}
+.form-control:focus { border-color: var(--sun); background: rgba(245,166,35,0.06); }
+.form-control option { background: var(--sky-mid); }
+.calc-result { background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(29,185,84,0.08)); border: 1px solid rgba(245,166,35,0.25); border-radius: 16px; padding: 32px; margin-top: 32px; display: none; }
+.calc-result.show { display: block; }
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-top: 16px; }
+.result-item { text-align: center; }
+.result-val { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--sun); }
+.result-label { font-size: 0.82rem; color: var(--gray-300); margin-top: 4px; }
+
+/* ═══ SYSTEM BUILDER ═══ */
+.builder-wrap { max-width: 900px; margin: 0 auto; padding: 0 40px 80px; }
+.builder-grid { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+.builder-options { display: flex; flex-direction: column; gap: 24px; }
+.builder-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.builder-section h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; color: var(--sun); }
+.option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+.option-btn {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 10px; text-align: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.option-btn.selected { border-color: var(--sun); background: rgba(245,166,35,0.1); color: var(--sun); }
+.option-btn:hover:not(.selected) { border-color: rgba(245,166,35,0.3); }
+.option-label { font-size: 0.82rem; font-weight: 600; margin-top: 6px; display: block; }
+.option-price { font-size: 0.75rem; color: var(--grass); margin-top: 2px; display: block; }
+.builder-summary { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; position: sticky; top: 100px; }
+.summary-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 24px; }
+.summary-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.summary-row:last-child { border-bottom: none; }
+.summary-total { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--sun); margin: 20px 0; }
+
+/* ═══ APPOINTMENT ═══ */
+.appt-wrap { max-width: 800px; margin: 0 auto; padding: 0 40px 80px; }
+.appt-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 48px; }
+
+/* ═══ CONTACT / SUPPORT ═══ */
+.contact-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px; }
+.contact-info { display: flex; flex-direction: column; gap: 24px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-icon { font-size: 1.5rem; width: 48px; height: 48px; background: rgba(245,166,35,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-text h4 { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 4px; }
+.contact-text p { color: var(--gray-300); font-size: 0.9rem; }
+.map-placeholder { height: 200px; background: var(--sky-mid); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gray-500); font-size: 0.9rem; border: 1px solid var(--border); margin-top: 20px; }
+.faq-list { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.faq-q { padding: 18px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.95rem; }
+.faq-q:hover { color: var(--sun); }
+.faq-a { padding: 0 24px 18px; color: var(--gray-300); font-size: 0.9rem; line-height: 1.6; display: none; }
+.faq-a.open { display: block; }
+
+/* ═══ PORTFOLIO ═══ */
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; padding: 0 40px 80px; max-width: 1400px; margin: 0 auto; }
+.portfolio-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.3s; }
+.portfolio-card:hover { transform: translateY(-4px); border-color: rgba(245,166,35,0.3); }
+.portfolio-img { height: 200px; background: linear-gradient(135deg, #1a3a5c, #0d2235); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+.portfolio-body { padding: 24px; }
+.portfolio-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.portfolio-details { color: var(--gray-300); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px; }
+.portfolio-stars { color: var(--sun); font-size: 0.9rem; }
+.portfolio-review { color: var(--gray-300); font-size: 0.85rem; font-style: italic; margin-top: 8px; }
+
+/* ═══ CART ═══ */
+.cart-wrap { max-width: 1000px; margin: 0 auto; padding: 0 40px 80px; }
+.cart-grid { display: grid; grid-template-columns: 1fr 320px; gap: 32px; }
+.cart-items { display: flex; flex-direction: column; gap: 16px; }
+.cart-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; gap: 16px; align-items: center; }
+.cart-item-img { width: 60px; height: 60px; background: var(--sky-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+.cart-item-info { flex: 1; }
+.cart-item-name { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 4px; }
+.cart-item-price { color: var(--sun); font-weight: 600; }
+.cart-item-remove { background: none; border: none; color: var(--red); cursor: pointer; font-size: 1.2rem; }
+.cart-summary-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px; position: sticky; top: 100px; }
+.cart-empty { text-align: center; padding: 80px 40px; color: var(--gray-500); }
+.cart-empty-icon { font-size: 4rem; margin-bottom: 16px; }
+
+/* ═══ DASHBOARD ═══ */
+.dashboard-wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
+.dash-grid { display: grid; grid-template-columns: 240px 1fr; gap: 32px; margin-top: 20px; }
+.dash-sidebar { display: flex; flex-direction: column; gap: 4px; }
+.dash-nav-item { padding: 12px 16px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 10px; color: var(--gray-300); transition: all 0.2s; }
+.dash-nav-item:hover, .dash-nav-item.active { background: rgba(245,166,35,0.1); color: var(--sun); }
+.dash-content { }
+.dash-panel { display: none; }
+.dash-panel.active { display: block; }
+.orders-list { display: flex; flex-direction: column; gap: 12px; }
+.order-row { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+.order-id { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--sun); }
+.order-status { padding: 4px 12px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; }
+.status-pending { background: rgba(245,166,35,0.2); color: var(--sun); }
+.status-confirmed { background: rgba(29,185,84,0.2); color: var(--grass); }
+.status-installing { background: rgba(100,150,255,0.2); color: #7EB8FF; }
+.status-completed { background: rgba(255,255,255,0.1); color: var(--gray-300); }
+.appt-row { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+
+/* ═══ ADMIN ═══ */
+#page-admin { background: #0A1625; }
+.admin-layout { display: flex; min-height: calc(100vh - 80px); }
+.admin-sidebar { width: 260px; background: rgba(255,255,255,0.03); border-right: 1px solid var(--border); padding: 24px 16px; flex-shrink: 0; }
+.admin-logo { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--sun); padding: 8px 12px; margin-bottom: 24px; }
+.admin-logo span { display: block; font-size: 0.7rem; font-weight: 400; color: var(--gray-500); font-family: 'DM Sans', sans-serif; margin-top: 2px; }
+.admin-nav-section { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-700); padding: 12px 12px 8px; margin-top: 12px; }
+.admin-nav-item { padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 0.88rem; display: flex; align-items: center; gap: 10px; color: var(--gray-300); transition: all 0.2s; margin-bottom: 2px; }
+.admin-nav-item:hover, .admin-nav-item.active { background: rgba(245,166,35,0.1); color: var(--sun); }
+.admin-main { flex: 1; padding: 32px; overflow-y: auto; }
+.admin-panel { display: none; }
+.admin-panel.active { display: block; }
+.admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+.admin-stat { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+.admin-stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--sun); }
+.admin-stat-label { font-size: 0.82rem; color: var(--gray-500); margin-top: 4px; }
+.admin-stat-change { font-size: 0.78rem; color: var(--grass); margin-top: 8px; font-weight: 600; }
+.admin-table-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.admin-table-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.admin-table-title { font-family: 'Syne', sans-serif; font-weight: 700; }
+table { width: 100%; border-collapse: collapse; }
+th { padding: 14px 20px; text-align: left; font-size: 0.78rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+td { padding: 16px 20px; font-size: 0.88rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.02); }
+.action-btn { background: none; border: 1px solid var(--border); color: var(--gray-300); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; transition: all 0.2s; margin-right: 6px; }
+.action-btn:hover { border-color: var(--sun); color: var(--sun); }
+.action-btn.danger:hover { border-color: var(--red); color: var(--red); }
+.chart-bar-wrap { display: flex; align-items: flex-end; gap: 12px; height: 160px; margin-top: 20px; }
+.chart-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.chart-bar { width: 100%; background: rgba(245,166,35,0.2); border-radius: 6px 6px 0 0; transition: all 0.5s; position: relative; overflow: hidden; }
+.chart-bar::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--sun), rgba(245,166,35,0.4)); }
+.chart-label { font-size: 0.72rem; color: var(--gray-500); }
+
+/* ═══ MODAL ═══ */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; display: none; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--sky-mid); border: 1px solid var(--border); border-radius: 20px; padding: 40px; width: 90%; max-width: 560px; max-height: 90vh; overflow-y: auto; position: relative; animation: modalIn 0.3s ease; }
+@keyframes modalIn { from{transform:scale(0.9) translateY(20px);opacity:0} to{transform:scale(1) translateY(0);opacity:1} }
+.modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: var(--gray-300); font-size: 1.5rem; cursor: pointer; }
+.modal-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 24px; }
+
+/* ═══ TOAST ═══ */
+.toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: var(--sky-mid); border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; min-width: 280px; display: flex; align-items: center; gap: 12px; font-size: 0.9rem; animation: toastIn 0.3s ease; box-shadow: var(--shadow); }
+.toast.success { border-color: rgba(29,185,84,0.5); }
+.toast.error { border-color: rgba(229,57,53,0.5); }
+@keyframes toastIn { from{transform:translateX(100%);opacity:0} to{transform:translateX(0);opacity:1} }
+
+/* ═══ LOGIN / AUTH ═══ */
+.auth-wrap { max-width: 460px; margin: 0 auto; padding: 60px 40px; }
+.auth-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 48px; }
+.auth-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
+.auth-sub { color: var(--gray-300); font-size: 0.9rem; margin-bottom: 32px; }
+.auth-switch { text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--gray-300); }
+.auth-switch a { color: var(--sun); text-decoration: none; cursor: pointer; font-weight: 600; }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: #060F1C; border-top: 1px solid var(--border);
+  padding: 60px 40px 32px;
+}
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+.footer-brand .footer-logo { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--sun); margin-bottom: 12px; }
+.footer-brand p { color: var(--gray-500); font-size: 0.88rem; line-height: 1.6; max-width: 280px; }
+.footer-social { display: flex; gap: 12px; margin-top: 20px; }
+.social-btn { width: 38px; height: 38px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; text-decoration: none; color: var(--gray-300); font-size: 1rem; }
+.social-btn:hover { border-color: var(--sun); color: var(--sun); }
+.footer-col h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 16px; color: var(--white); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { color: var(--gray-500); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; cursor: pointer; }
+.footer-col ul li a:hover { color: var(--sun); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--gray-500); }
+.footer-bottom a { color: var(--gray-500); text-decoration: none; }
+.footer-bottom a:hover { color: var(--sun); }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  #nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 60px 20px; }
+  .hero-visual { display: none; }
+  .section { padding: 60px 20px; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .admin-sidebar { width: 200px; }
+  .admin-stats { grid-template-columns: 1fr 1fr; }
+  .builder-grid { grid-template-columns: 1fr; }
+  .cart-grid { grid-template-columns: 1fr; }
+  .dash-grid { grid-template-columns: 1fr; }
+  .products-grid, .portfolio-grid { padding: 0 20px 60px; }
+  .calculator-wrap, .builder-wrap, .appt-wrap, .contact-wrap, .cart-wrap, .dashboard-wrap, .auth-wrap { padding: 0 20px 60px; }
+  .page-header { padding: 40px 20px 20px; }
+  .stats-bar { gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+
+/* ═══ UTILITY ═══ */
+.text-center { text-align: center; }
+.text-sun { color: var(--sun); }
+.text-grass { color: var(--grass); }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mb-24 { margin-bottom: 24px; }
+.flex { display: flex; }
+.gap-12 { gap: 12px; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.no-data { text-align: center; padding: 60px; color: var(--gray-500); font-size: 0.95rem; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="nav-logo" onclick="showPage('home')">
+    <span class="logo-icon">☀️</span> SolarTex
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('products')">Products</a></li>
+    <li><a onclick="showPage('calculator')">Calculator</a></li>
+    <li><a onclick="showPage('portfolio')">Projects</a></li>
+    <li><a onclick="showPage('support')">Support</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="showPage('cart')">🛒 Cart <span class="cart-badge" id="cartBadge">0</span></button>
+    <div id="navAuth">
+      <button class="btn-primary" onclick="showPage('login')">Sign In</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ TOAST CONTAINER ═══ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge">⚡ Houston's #1 Solar Installer</div>
+      <h1>Power Your Home With <span>Clean Solar</span> Energy</h1>
+      <p>SolarTex Houston delivers premium solar panel systems with professional installation, guaranteed savings, and a 25-year performance warranty. Start saving on day one.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showPage('quote')">☀️ Get Free Quote</button>
+        <button class="btn-outline" onclick="showPage('appointment')">📅 Book Appointment</button>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-item"><div class="stat-num">1,200+</div><div class="stat-label">Installations Done</div></div>
+        <div class="stat-item"><div class="stat-num">98%</div><div class="stat-label">Customer Satisfaction</div></div>
+        <div class="stat-item"><div class="stat-num">$2.4M</div><div class="stat-label">Saved for Customers</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="solar-illustration">
+        <div class="sol-panel sol-p1"></div>
+        <div class="sol-panel sol-p2"></div>
+        <div class="sol-panel sol-p3"></div>
+        <div class="sol-sun"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-tag">Why Go Solar</div>
+      <h2 class="section-title">Benefits That Pay For Themselves</h2>
+      <p class="section-sub">Solar energy isn't just good for the planet — it's one of the smartest financial decisions you can make as a homeowner or business owner.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <div class="benefit-title">Massive Savings</div>
+          <div class="benefit-desc">Reduce your electricity bill by up to 90%. Most customers break even within 5–7 years and enjoy free energy for 20+ years.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌍</div>
+          <div class="benefit-title">Eco-Friendly</div>
+          <div class="benefit-desc">Eliminate your carbon footprint. A typical solar system offsets 3–4 tons of CO₂ per year — equivalent to planting 100 trees.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🏠</div>
+          <div class="benefit-title">Increase Property Value</div>
+          <div class="benefit-desc">Homes with solar panels sell 4% faster and for up to $15,000 more than comparable non-solar homes.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🔋</div>
+          <div class="benefit-title">Energy Independence</div>
+          <div class="benefit-desc">With battery backup, stay powered during grid outages. No more blackouts disrupting your life or business.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🏛️</div>
+          <div class="benefit-title">Tax Incentives</div>
+          <div class="benefit-desc">Claim the 30% Federal Solar Tax Credit plus Texas state incentives. Significant upfront cost reduction guaranteed.</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🛡️</div>
+          <div class="benefit-title">25-Year Warranty</div>
+          <div class="benefit-desc">All our panels come with a 25-year performance warranty. We stand behind our products and installation quality.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section services-bg">
+    <div class="section-inner">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+      <p class="section-sub">From consultation to installation to ongoing maintenance — we handle every step of your solar journey.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-title">Residential Solar</div>
+          <div class="service-desc">Custom solar systems designed for homes of all sizes. We handle permits, installation, and grid connection — completely turnkey.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-title">Commercial Solar</div>
+          <div class="service-desc">Reduce operating costs for your business with large-scale solar installations. Warehouses, offices, retail — we do it all.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-title">Battery Storage</div>
+          <div class="service-desc">Add battery backup to your solar system and store excess energy for nights, cloudy days, or power outages.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-title">Solar Maintenance</div>
+          <div class="service-desc">Annual cleaning, inspection, and performance monitoring. Keep your system running at peak efficiency year after year.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <div class="service-title">EV Charging</div>
+          <div class="service-desc">Bundle your solar system with a home EV charging station. Charge your electric vehicle with 100% clean energy.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <div class="service-title">Solar Consultation</div>
+          <div class="service-desc">Free no-obligation site assessment and custom proposal. We'll show you exactly how much you can save before you commit.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-tag">Happy Customers</div>
+      <h2 class="section-title">What Houston Says</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">"SolarTex cut our electricity bill from $380/month to under $30. The install was done in a single day and the team was incredibly professional."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">JR</div>
+            <div><div class="author-name">James Richardson</div><div class="author-loc">Katy, TX</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">"We went solar for our warehouse and the ROI has been incredible. Saved over $8,000 in the first year alone. Highly recommend SolarTex."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">ML</div>
+            <div><div class="author-name">Maria Lopez</div><div class="author-loc">Sugar Land, TX</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">"Best investment we've ever made in our home. The system paid for itself in 5 years and we've been getting free electricity since. Amazing."</div>
+          <div class="testimonial-author">
+            <div class="author-avatar">DK</div>
+            <div><div class="author-name">David Kim</div><div class="author-loc">The Woodlands, TX</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: linear-gradient(135deg, rgba(245,166,35,0.1), rgba(29,185,84,0.06)); text-align:center;">
+    <div class="section-inner">
+      <h2 class="section-title">Ready to Go Solar?</h2>
+      <p class="section-sub" style="margin:0 auto 32px;">Get a free custom quote in under 24 hours. No pressure, no hidden fees.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-primary" style="padding:16px 36px;font-size:1rem;" onclick="showPage('quote')">Get Free Quote</button>
+        <button class="btn-outline" style="padding:16px 36px;font-size:1rem;" onclick="showPage('products')">Browse Products</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ PRODUCTS PAGE ═══ -->
+<div class="page" id="page-products">
+  <div class="page-header">
+    <div class="section-tag">Our Products</div>
+    <h1 class="section-title">Solar Panels & Systems</h1>
+    <p class="section-sub" style="margin:0 auto;">Premium solar panels from the world's leading manufacturers. Every product includes installation support and warranty.</p>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<!-- ═══ CALCULATOR ═══ -->
+<div class="page" id="page-calculator">
+  <div class="page-header">
+    <div class="section-tag">Solar Calculator</div>
+    <h1 class="section-title">Calculate Your Solar Needs</h1>
+    <p class="section-sub" style="margin:0 auto;">Enter your electricity usage and we'll recommend the perfect system for your home or business.</p>
+  </div>
+  <div class="calculator-wrap">
+    <div class="calc-card">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Monthly Electricity Bill (USD)</label>
+          <input class="form-control" type="number" id="calcBill" placeholder="e.g. 200" oninput="runCalc()">
+        </div>
+        <div class="form-group">
+          <label>Monthly Usage (kWh) — optional</label>
+          <input class="form-control" type="number" id="calcKwh" placeholder="e.g. 900" oninput="runCalc()">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Property Type</label>
+          <select class="form-control" id="calcType" onchange="runCalc()">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Average Sun Hours Per Day</label>
+          <select class="form-control" id="calcSun" onchange="runCalc()">
+            <option value="5.5">Houston, TX (5.5 hrs)</option>
+            <option value="6.0">South Texas (6.0 hrs)</option>
+            <option value="5.0">North Texas (5.0 hrs)</option>
+            <option value="4.5">East Texas (4.5 hrs)</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-result" id="calcResult">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px;">Your Recommended Solar System</h3>
+        <p style="color:var(--gray-300);font-size:0.9rem;">Based on your inputs, here's what we recommend:</p>
+        <div class="result-grid">
+          <div class="result-item"><div class="result-val" id="rSystemSize">—</div><div class="result-label">System Size (kW)</div></div>
+          <div class="result-item"><div class="result-val" id="rPanels">—</div><div class="result-label">Panels Required</div></div>
+          <div class="result-item"><div class="result-val" id="rCost">—</div><div class="result-label">Est. Install Cost</div></div>
+          <div class="result-item"><div class="result-val" id="rSavings">—</div><div class="result-label">Monthly Savings</div></div>
+          <div class="result-item"><div class="result-val" id="rPayback">—</div><div class="result-label">Payback Period</div></div>
+          <div class="result-item"><div class="result-val" id="r25yr">—</div><div class="result-label">25-Year Savings</div></div>
+        </div>
+        <button class="btn-primary mt-24" onclick="showPage('quote')">Get Your Custom Quote →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SYSTEM BUILDER ═══ -->
+<div class="page" id="page-builder">
+  <div class="page-header">
+    <div class="section-tag">System Builder</div>
+    <h1 class="section-title">Build Your Solar System</h1>
+    <p class="section-sub" style="margin:0 auto;">Mix and match components to design your perfect solar setup. Pricing updates in real time.</p>
+  </div>
+  <div class="builder-wrap">
+    <div class="builder-grid">
+      <div class="builder-options">
+        <div class="builder-section">
+          <h3>⚡ Number of Panels</h3>
+          <div class="option-grid" id="builderPanels">
+            <div class="option-btn" onclick="selectBuilderOption('panels',6,1800,this)"><span style="font-size:1.5rem">🔆</span><span class="option-label">6 Panels</span><span class="option-price">+$1,800</span></div>
+            <div class="option-btn selected" onclick="selectBuilderOption('panels',10,3000,this)"><span style="font-size:1.5rem">🔆🔆</span><span class="option-label">10 Panels</span><span class="option-price">+$3,000</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('panels',16,4800,this)"><span style="font-size:1.5rem">🔆🔆🔆</span><span class="option-label">16 Panels</span><span class="option-price">+$4,800</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('panels',24,7200,this)"><span style="font-size:1.5rem">🔆🔆🔆🔆</span><span class="option-label">24 Panels</span><span class="option-price">+$7,200</span></div>
+          </div>
+        </div>
+        <div class="builder-section">
+          <h3>🔌 Inverter Type</h3>
+          <div class="option-grid">
+            <div class="option-btn selected" onclick="selectBuilderOption('inverter','String',1200,this)"><span style="font-size:1.5rem">🔲</span><span class="option-label">String Inverter</span><span class="option-price">+$1,200</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('inverter','Micro',2000,this)"><span style="font-size:1.5rem">🔳</span><span class="option-label">Micro-Inverters</span><span class="option-price">+$2,000</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('inverter','Hybrid',2800,this)"><span style="font-size:1.5rem">⚡</span><span class="option-label">Hybrid Inverter</span><span class="option-price">+$2,800</span></div>
+          </div>
+        </div>
+        <div class="builder-section">
+          <h3>🔋 Battery Backup</h3>
+          <div class="option-grid">
+            <div class="option-btn selected" onclick="selectBuilderOption('battery','None',0,this)"><span style="font-size:1.5rem">❌</span><span class="option-label">No Battery</span><span class="option-price">+$0</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('battery','10kWh',4500,this)"><span style="font-size:1.5rem">🔋</span><span class="option-label">10 kWh Battery</span><span class="option-price">+$4,500</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('battery','20kWh',8500,this)"><span style="font-size:1.5rem">🔋🔋</span><span class="option-label">20 kWh Battery</span><span class="option-price">+$8,500</span></div>
+          </div>
+        </div>
+        <div class="builder-section">
+          <h3>🔧 Installation</h3>
+          <div class="option-grid">
+            <div class="option-btn selected" onclick="selectBuilderOption('install','Standard',1500,this)"><span style="font-size:1.5rem">🏠</span><span class="option-label">Standard Install</span><span class="option-price">+$1,500</span></div>
+            <div class="option-btn" onclick="selectBuilderOption('install','Premium',2500,this)"><span style="font-size:1.5rem">🏆</span><span class="option-label">Premium Install</span><span class="option-price">+$2,500</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="builder-summary">
+          <div class="summary-title">💰 Your System Quote</div>
+          <div class="summary-row"><span>Panels</span><span id="sumPanels">10 × $300</span></div>
+          <div class="summary-row"><span>Inverter</span><span id="sumInverter">String – $1,200</span></div>
+          <div class="summary-row"><span>Battery</span><span id="sumBattery">None – $0</span></div>
+          <div class="summary-row"><span>Installation</span><span id="sumInstall">Standard – $1,500</span></div>
+          <div class="summary-row"><span>Federal Tax Credit (30%)</span><span id="sumTax" style="color:var(--grass)">−$1,710</span></div>
+          <hr class="divider">
+          <div class="summary-total" id="sumTotal">$5,700</div>
+          <div style="color:var(--gray-500);font-size:0.8rem;margin-bottom:20px;">After 30% federal tax credit</div>
+          <button class="btn-primary w-full" onclick="addBuilderToCart()">Add to Cart & Order</button>
+          <button class="btn-outline w-full mt-16" onclick="showPage('appointment')" style="display:block;">Schedule Site Visit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APPOINTMENT PAGE ═══ -->
+<div class="page" id="page-appointment">
+  <div class="page-header">
+    <div class="section-tag">Schedule</div>
+    <h1 class="section-title">Book a Consultation</h1>
+    <p class="section-sub" style="margin:0 auto;">Schedule a free site assessment with one of our solar experts. We'll come to you.</p>
+  </div>
+  <div class="appt-wrap">
+    <div class="appt-card">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input class="form-control" id="apptName" placeholder="John Smith"></div>
+        <div class="form-group"><label>Email Address *</label><input class="form-control" id="apptEmail" type="email" placeholder="john@email.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone Number *</label><input class="form-control" id="apptPhone" type="tel" placeholder="+1 (713) 000-0000"></div>
+        <div class="form-group"><label>Service Type *</label>
+          <select class="form-control" id="apptService">
+            <option value="">Select service...</option>
+            <option>Residential Installation</option>
+            <option>Commercial Installation</option>
+            <option>Battery Storage</option>
+            <option>Maintenance & Repair</option>
+            <option>Free Consultation</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Property Address *</label><input class="form-control" id="apptAddress" placeholder="123 Main St, Houston, TX 77001"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Preferred Date *</label><input class="form-control" id="apptDate" type="date"></div>
+        <div class="form-group"><label>Preferred Time *</label>
+          <select class="form-control" id="apptTime">
+            <option value="">Select time...</option>
+            <option>8:00 AM – 10:00 AM</option>
+            <option>10:00 AM – 12:00 PM</option>
+            <option>12:00 PM – 2:00 PM</option>
+            <option>2:00 PM – 4:00 PM</option>
+            <option>4:00 PM – 6:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Additional Notes</label><textarea class="form-control" id="apptNotes" rows="3" placeholder="Any specific questions or requirements..."></textarea></div>
+      <button class="btn-primary" style="padding:16px 32px;font-size:1rem;" onclick="bookAppointment()">📅 Confirm Appointment</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUOTE PAGE ═══ -->
+<div class="page" id="page-quote">
+  <div class="page-header">
+    <div class="section-tag">Free Quote</div>
+    <h1 class="section-title">Get Your Free Solar Quote</h1>
+    <p class="section-sub" style="margin:0 auto;">Fill out the form below and we'll send you a custom quote within 24 hours — no pressure, no obligation.</p>
+  </div>
+  <div class="appt-wrap">
+    <div class="appt-card">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input class="form-control" id="quoteName" placeholder="John Smith"></div>
+        <div class="form-group"><label>Email Address *</label><input class="form-control" id="quoteEmail" type="email" placeholder="john@email.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone Number</label><input class="form-control" id="quotePhone" type="tel" placeholder="+1 (713) 000-0000"></div>
+        <div class="form-group"><label>Property Type</label>
+          <select class="form-control" id="quoteType">
+            <option>Residential</option><option>Commercial</option><option>Industrial</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Address</label><input class="form-control" id="quoteAddress" placeholder="123 Main St, Houston, TX"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Monthly Electric Bill ($)</label><input class="form-control" id="quoteBill" type="number" placeholder="e.g. 200"></div>
+        <div class="form-group"><label>Roof Type</label>
+          <select class="form-control" id="quoteRoof">
+            <option>Asphalt Shingles</option><option>Metal</option><option>Tile</option><option>Flat</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Additional Info</label><textarea class="form-control" id="quoteNotes" rows="3" placeholder="Anything else we should know..."></textarea></div>
+      <button class="btn-primary" style="padding:16px 32px;font-size:1rem;" onclick="submitQuote()">☀️ Request Free Quote</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SUPPORT PAGE ═══ -->
+<div class="page" id="page-support">
+  <div class="page-header">
+    <div class="section-tag">Support</div>
+    <h1 class="section-title">Customer Support</h1>
+    <p class="section-sub" style="margin:0 auto;">We're here to help. Reach out through any channel below or browse our FAQ.</p>
+  </div>
+  <div class="contact-wrap">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;">
+      <a href="https://wa.me/17135550100" target="_blank" style="text-decoration:none;">
+        <button class="btn-primary" style="background:#25D366;padding:14px 28px;">💬 WhatsApp Us</button>
+      </a>
+      <button class="btn-outline" onclick="showPage('contact')">📧 Email Support</button>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:16px;">Send a Message</h3>
+    <div class="appt-card" style="margin-bottom:40px;">
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input class="form-control" id="suppName" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input class="form-control" id="suppEmail" type="email" placeholder="your@email.com"></div>
+      </div>
+      <div class="form-group"><label>Subject</label><input class="form-control" id="suppSubject" placeholder="How can we help?"></div>
+      <div class="form-group"><label>Message</label><textarea class="form-control" id="suppMessage" rows="4" placeholder="Describe your issue or question..."></textarea></div>
+      <button class="btn-primary" onclick="submitSupport()">Send Message</button>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:16px;">Frequently Asked Questions</h3>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does a solar installation take?</span><span>+</span></div><div class="faq-a">Most residential installations are completed in 1–2 days. Commercial projects may take 3–5 days depending on size. We handle all permits so you don't have to.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How much can I save on my electricity bill?</span><span>+</span></div><div class="faq-a">The average Houston homeowner saves 70–90% on their electricity bill. Your exact savings depend on your usage, system size, and roof orientation.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What is the Federal Solar Tax Credit?</span><span>+</span></div><div class="faq-a">The federal government offers a 30% tax credit on the full cost of your solar installation. This is a dollar-for-dollar reduction in your federal income tax, not just a deduction.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do solar panels work during cloudy days?</span><span>+</span></div><div class="faq-a">Yes! Solar panels still generate electricity on cloudy days, though at reduced efficiency (10–25%). They also work in rain, just at lower output. Houston averages 204 sunny days per year.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What warranty do you offer?</span><span>+</span></div><div class="faq-a">We offer a 25-year performance warranty on all panels, a 10-year inverter warranty, and a 5-year workmanship warranty on installation. We're fully licensed and insured in Texas.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do you offer financing?</span><span>+</span></div><div class="faq-a">Yes! We offer $0 down solar loans, leases, and power purchase agreements (PPAs). Many customers start saving from day one with zero upfront cost.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PORTFOLIO PAGE ═══ -->
+<div class="page" id="page-portfolio">
+  <div class="page-header">
+    <div class="section-tag">Our Work</div>
+    <h1 class="section-title">Completed Projects</h1>
+    <p class="section-sub" style="margin:0 auto;">Over 1,200 successful installations across Greater Houston. Here are some of our featured projects.</p>
+  </div>
+  <div class="portfolio-grid" id="portfolioGrid"></div>
+</div>
+
+<!-- ═══ CONTACT PAGE ═══ -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <div class="section-tag">Get In Touch</div>
+    <h1 class="section-title">Contact Us</h1>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info">
+          <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-text"><h4>Phone</h4><p>(713) 555-0100</p><p>Mon–Sat, 8am–6pm CT</p></div></div>
+          <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-text"><h4>Email</h4><p>info@solartexhouston.com</p><p>We reply within 24 hours</p></div></div>
+          <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-text"><h4>Office</h4><p>4500 Westheimer Rd, Suite 200</p><p>Houston, TX 77027</p></div></div>
+          <div class="contact-item"><div class="contact-icon">💬</div><div class="contact-text"><h4>WhatsApp</h4><p>+1 (713) 555-0100</p><p>Quick support via WhatsApp</p></div></div>
+        </div>
+        <div class="map-placeholder">🗺️ Google Map – 4500 Westheimer Rd, Houston TX</div>
+      </div>
+      <div class="appt-card">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:24px;">Send Us a Message</h3>
+        <div class="form-group"><label>Name</label><input class="form-control" id="ctName" placeholder="Your name"></div>
+        <div class="form-group"><label>Email</label><input class="form-control" id="ctEmail" type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>Subject</label><input class="form-control" id="ctSubject" placeholder="What's this about?"></div>
+        <div class="form-group"><label>Message</label><textarea class="form-control" id="ctMessage" rows="5" placeholder="Your message..."></textarea></div>
+        <button class="btn-primary w-full" onclick="submitContact()">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CART PAGE ═══ -->
+<div class="page" id="page-cart">
+  <div class="page-header">
+    <div class="section-tag">Shopping</div>
+    <h1 class="section-title">Your Cart</h1>
+  </div>
+  <div class="cart-wrap">
+    <div id="cartContent"></div>
+  </div>
+</div>
+
+<!-- ═══ LOGIN PAGE ═══ -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-sub">Sign in to your SolarTex account</p>
+      <div class="form-group"><label>Email Address</label><input class="form-control" id="loginEmail" type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input class="form-control" id="loginPass" type="password" placeholder="••••••••"></div>
+      <button class="btn-primary w-full" style="padding:14px;font-size:1rem;margin-top:8px;" onclick="handleLogin()">Sign In</button>
+      <div class="auth-switch">Don't have an account? <a onclick="showPage('register')">Create one</a></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REGISTER PAGE ═══ -->
+<div class="page" id="page-register">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-sub">Join thousands of Houston solar customers</p>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input class="form-control" id="regFirst" placeholder="John"></div>
+        <div class="form-group"><label>Last Name</label><input class="form-control" id="regLast" placeholder="Smith"></div>
+      </div>
+      <div class="form-group"><label>Email Address</label><input class="form-control" id="regEmail" type="email" placeholder="john@email.com"></div>
+      <div class="form-group"><label>Phone</label><input class="form-control" id="regPhone" type="tel" placeholder="+1 (713) 000-0000"></div>
+      <div class="form-group"><label>Password</label><input class="form-control" id="regPass" type="password" placeholder="Min 8 characters"></div>
+      <button class="btn-primary w-full" style="padding:14px;font-size:1rem;margin-top:8px;" onclick="handleRegister()">Create Account</button>
+      <div class="auth-switch">Already have an account? <a onclick="showPage('login')">Sign in</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CUSTOMER DASHBOARD ═══ -->
+<div class="page" id="page-dashboard">
+  <div class="page-header">
+    <div class="section-tag">My Account</div>
+    <h1 class="section-title" id="dashWelcome">My Dashboard</h1>
+  </div>
+  <div class="dashboard-wrap">
+    <div class="dash-grid">
+      <div class="dash-sidebar">
+        <div class="dash-nav-item active" onclick="showDashPanel('orders',this)">📦 My Orders</div>
+        <div class="dash-nav-item" onclick="showDashPanel('appts',this)">📅 Appointments</div>
+        <div class="dash-nav-item" onclick="showDashPanel('profile',this)">👤 Profile</div>
+        <div class="dash-nav-item" onclick="handleLogout()">🚪 Logout</div>
+      </div>
+      <div class="dash-content">
+        <div class="dash-panel active" id="dash-orders">
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:24px;">Order History</h3>
+          <div class="orders-list" id="customerOrders"></div>
+        </div>
+        <div class="dash-panel" id="dash-appts">
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:24px;">My Appointments</h3>
+          <div id="customerAppts"></div>
+        </div>
+        <div class="dash-panel" id="dash-profile">
+          <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:24px;">Account Details</h3>
+          <div class="appt-card">
+            <div class="form-row">
+              <div class="form-group"><label>First Name</label><input class="form-control" id="profFirst"></div>
+              <div class="form-group"><label>Last Name</label><input class="form-control" id="profLast"></div>
+            </div>
+            <div class="form-group"><label>Email</label><input class="form-control" id="profEmail" type="email"></div>
+            <div class="form-group"><label>Phone</label><input class="form-control" id="profPhone" type="tel"></div>
+            <button class="btn-primary" onclick="saveProfile()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ADMIN PAGE ═══ -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <div class="admin-sidebar">
+      <div class="admin-logo">SolarTex Admin<span>Management Dashboard</span></div>
+      <div class="admin-nav-section">Overview</div>
+      <div class="admin-nav-item active" onclick="showAdminPanel('dashboard',this)">📊 Dashboard</div>
+      <div class="admin-nav-section">Catalog</div>
+      <div class="admin-nav-item" onclick="showAdminPanel('products',this)">🔆 Products</div>
+      <div class="admin-nav-section">Business</div>
+      <div class="admin-nav-item" onclick="showAdminPanel('orders',this)">📦 Orders</div>
+      <div class="admin-nav-item" onclick="showAdminPanel('appointments',this)">📅 Appointments</div>
+      <div class="admin-nav-item" onclick="showAdminPanel('messages',this)">💬 Messages</div>
+      <div class="admin-nav-section">People</div>
+      <div class="admin-nav-item" onclick="showAdminPanel('customers',this)">👥 Customers</div>
+      <div class="admin-nav-section">Account</div>
+      <div class="admin-nav-item" onclick="handleLogout()">🚪 Logout</div>
+    </div>
+    <div class="admin-main">
+
+      <!-- Dashboard Overview -->
+      <div class="admin-panel active" id="admin-dashboard">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Dashboard Overview</h2>
+        <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-table-wrap">
+          <div class="admin-table-header"><div class="admin-table-title">Monthly Revenue (Last 6 Months)</div></div>
+          <div style="padding:24px;">
+            <div class="chart-bar-wrap" id="revenueChart"></div>
+          </div>
+        </div>
+        <div style="margin-top:24px;" class="admin-table-wrap">
+          <div class="admin-table-header"><div class="admin-table-title">Recent Orders</div></div>
+          <table><thead><tr><th>Order ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="recentOrdersTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Products Admin -->
+      <div class="admin-panel" id="admin-products">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+          <h2 style="font-family:'Syne',sans-serif;font-weight:800;">Manage Products</h2>
+          <button class="btn-primary" onclick="openProductModal()">+ Add Product</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table><thead><tr><th>Product</th><th>Capacity</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead>
+          <tbody id="adminProductsTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Orders Admin -->
+      <div class="admin-panel" id="admin-orders">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Manage Orders</h2>
+        <div class="admin-table-wrap">
+          <table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="adminOrdersTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Appointments Admin -->
+      <div class="admin-panel" id="admin-appointments">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Appointment Bookings</h2>
+        <div class="admin-table-wrap">
+          <table><thead><tr><th>Name</th><th>Service</th><th>Date & Time</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="adminApptsTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Messages Admin -->
+      <div class="admin-panel" id="admin-messages">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Support Messages</h2>
+        <div class="admin-table-wrap">
+          <table><thead><tr><th>From</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody id="adminMsgsTable"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Customers Admin -->
+      <div class="admin-panel" id="admin-customers">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;margin-bottom:24px;">Customer Accounts</h2>
+        <div class="admin-table-wrap">
+          <table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>Joined</th><th>Actions</th></tr></thead>
+          <tbody id="adminCustomersTable"></tbody></table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRODUCT MODAL ═══ -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('productModal')">×</button>
+    <div class="modal-title" id="productModalTitle">Add Product</div>
+    <div class="form-group"><label>Product Name *</label><input class="form-control" id="pName" placeholder="e.g. SunPower 550W Premium"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Capacity *</label><input class="form-control" id="pCapacity" placeholder="e.g. 550W"></div>
+      <div class="form-group"><label>Price (USD) *</label><input class="form-control" id="pPrice" type="number" placeholder="e.g. 450"></div>
+    </div>
+    <div class="form-group"><label>Category</label>
+      <select class="form-control" id="pCategory">
+        <option>Residential Panel</option><option>Commercial Panel</option><option>Complete System</option><option>Battery</option><option>Inverter</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Description *</label><textarea class="form-control" id="pDesc" rows="3" placeholder="Product description..."></textarea></div>
+    <div class="form-group"><label>Warranty</label><input class="form-control" id="pWarranty" placeholder="e.g. 25-year performance warranty"></div>
+    <div class="form-group"><label>Product Image Emoji</label><input class="form-control" id="pEmoji" placeholder="e.g. 🔆" value="🔆"></div>
+    <button class="btn-primary w-full" style="margin-top:8px;" onclick="saveProduct()">Save Product</button>
+    <input type="hidden" id="pEditId">
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">☀️ SolarTex Houston</div>
+      <p>Houston's most trusted solar energy company. Serving Greater Houston since 2018 with premium installations and unmatched customer service.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" title="Facebook">f</a>
+        <a class="social-btn" href="#" title="Instagram">📷</a>
+        <a class="social-btn" href="#" title="LinkedIn">in</a>
+        <a class="social-btn" href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('products')">Solar Panels</a></li>
+        <li><a onclick="showPage('calculator')">Calculator</a></li>
+        <li><a onclick="showPage('builder')">System Builder</a></li>
+        <li><a onclick="showPage('portfolio')">Projects</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a onclick="showPage('appointment')">Residential Solar</a></li>
+        <li><a onclick="showPage('appointment')">Commercial Solar</a></li>
+        <li><a onclick="showPage('appointment')">Battery Storage</a></li>
+        <li><a onclick="showPage('appointment')">Maintenance</a></li>
+        <li><a onclick="showPage('quote')">Free Quote</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a onclick="showPage('support')">FAQ</a></li>
+        <li><a onclick="showPage('contact')">Contact Us</a></li>
+        <li><a onclick="showPage('login')">My Account</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SolarTex Houston LLC. All rights reserved.</span>
+    <span><a href="#">Privacy Policy</a> · <a href="#">Terms</a> · Licensed & Insured in Texas</span>
+  </div>
+</footer>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+// ═══ DATA STORE (localStorage) ═══
+const DB = {
+  get: (key, def=[]) => { try { return JSON.parse(localStorage.getItem('st_'+key)) ?? def; } catch { return def; } },
+  set: (key, val) => localStorage.setItem('st_'+key, JSON.stringify(val)),
+};
+
+// ═══ DEFAULT DATA ═══
+function initData() {
+  if (!DB.get('initialized', false)) {
+    DB.set('products', [
+      { id: 1, name: 'SunPower 550W Maxeon', capacity: '550W', price: 420, category: 'Residential Panel', desc: 'Industry-leading efficiency of 22.8%. The Maxeon cell technology is more durable and generates more energy over time than conventional panels.', warranty: '25-year product & performance warranty', emoji: '🔆', badge: 'Best Seller' },
+      { id: 2, name: 'LG NeON R 405W', capacity: '405W', price: 310, category: 'Residential Panel', desc: 'LG\'s finest panel with both-sided cell contact. Excellent performance in high-temperature and low-light conditions. Perfect for Houston.', warranty: '25-year product warranty, 25-year performance warranty', emoji: '☀️', badge: 'Popular' },
+      { id: 3, name: 'Canadian Solar 600W HiKu7', capacity: '600W', price: 480, category: 'Commercial Panel', desc: 'High-power commercial module featuring TOPCon technology. Ideal for large commercial and industrial rooftop or ground-mount systems.', warranty: '12-year product warranty, 30-year performance warranty', emoji: '⚡', badge: 'Commercial' },
+      { id: 4, name: 'REC Group Alpha 405W', capacity: '405W', price: 365, category: 'Residential Panel', desc: 'Award-winning HJT technology panel. Excellent temperature coefficient and low degradation rate for maximum lifetime energy yield.', warranty: '25-year comprehensive warranty', emoji: '🌟', badge: null },
+      { id: 5, name: '10kWh Complete Home System', capacity: '6kW', price: 12500, category: 'Complete System', desc: 'All-in-one home solar system including 16 × 375W panels, hybrid inverter, monitoring system, and professional installation.', warranty: '25-year panel, 10-year inverter, 5-year install warranty', emoji: '🏠', badge: 'All-Inclusive' },
+      { id: 6, name: 'Tesla Powerwall 3', capacity: '13.5 kWh', price: 8500, category: 'Battery', desc: 'The latest Powerwall with integrated inverter, 13.5 kWh storage, and 11.5 kW peak power output. Perfect for whole-home backup.', warranty: '10-year warranty, unlimited cycle warranty', emoji: '🔋', badge: 'New' },
+    ]);
+    DB.set('portfolio', [
+      { id:1, title:'5,000 sqft Residential – Katy, TX', kw:'12kW', panels:32, cost:28000, review:'Our bill went from $450 to $22/month. Incredible ROI.', reviewer:'Johnson Family', emoji:'🏡', stars:5 },
+      { id:2, title:'Commercial Warehouse – Sugar Land, TX', kw:'85kW', panels:210, cost:145000, review:'Saved $14,000 in the first year. Best business decision ever.', reviewer:'TechLogix Corp', emoji:'🏭', stars:5 },
+      { id:3, title:'Medical Office – The Woodlands, TX', kw:'25kW', panels:62, cost:52000, review:'Professional team, clean installation. Very happy with results.', reviewer:'Woodlands Medical Group', emoji:'🏥', stars:5 },
+      { id:4, title:'Luxury Home – River Oaks, Houston', kw:'18kW', panels:48, cost:38000, review:'Perfectly integrated with our home design. Outstanding work.', reviewer:'Martinez Family', emoji:'🏰', stars:5 },
+      { id:5, title:'School Campus – Pearland, TX', kw:'120kW', panels:300, cost:195000, review:'A great way to educate students while saving on energy costs.', reviewer:'Pearland ISD', emoji:'🏫', stars:5 },
+      { id:6, title:'Restaurant Chain – Galleria Area', kw:'30kW', panels:80, cost:58000, review:'Reduced our operating costs significantly. Highly recommend.', reviewer:'Casa Bella Restaurants', emoji:'🍽️', stars:5 },
+    ]);
+    DB.set('orders', [
+      { id:'ORD-001', customer:'Demo Customer', email:'demo@test.com', items:'SunPower 550W × 10', total:4200, status:'Completed', date:'2025-02-15' },
+      { id:'ORD-002', customer:'Maria Garcia', email:'maria@test.com', items:'LG NeON R 405W × 20', total:6200, status:'Installing', date:'2025-03-01' },
+      { id:'ORD-003', customer:'James Wilson', email:'james@test.com', items:'10kW Complete System × 1', total:12500, status:'Confirmed', date:'2025-03-20' },
+    ]);
+    DB.set('appointments', [
+      { id:'APT-001', name:'Sarah Connor', email:'sarah@test.com', phone:'713-555-0101', service:'Residential Installation', address:'123 Oak Lane, Katy TX', date:'2025-04-10', time:'10:00 AM – 12:00 PM', notes:'Has a 3000 sqft home', status:'Confirmed' },
+      { id:'APT-002', name:'Robert Kim', email:'robert@test.com', phone:'713-555-0202', service:'Free Consultation', address:'456 Maple Dr, Sugar Land TX', date:'2025-04-12', time:'2:00 PM – 4:00 PM', notes:'', status:'Pending' },
+    ]);
+    DB.set('messages', [
+      { id:'MSG-001', name:'Alice Brown', email:'alice@test.com', subject:'Panel cleaning question', message:'How often should I clean my solar panels?', date:'2025-03-25', status:'Read' },
+      { id:'MSG-002', name:'Carlos Rivera', email:'carlos@test.com', subject:'Warranty claim', message:'One panel seems to be underperforming. Want to file a warranty claim.', date:'2025-03-28', status:'Unread' },
+    ]);
+    DB.set('customers', [
+      { id:'USR-001', first:'Demo', last:'Customer', email:'demo@solartex.com', phone:'713-555-0001', joined:'2025-01-15' },
+    ]);
+    DB.set('initialized', true);
+  }
+}
+
+// ═══ STATE ═══
+let cart = DB.get('cart', []);
+let currentUser = DB.get('currentUser', null);
+let builderState = { panels:10, panelPrice:3000, inverter:'String', inverterPrice:1200, battery:'None', batteryPrice:0, install:'Standard', installPrice:1500 };
+
+// ═══ NAVIGATION ═══
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-'+page);
+  if (el) {
+    el.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  // Render dynamic pages
+  if (page === 'products') renderProducts();
+  if (page === 'portfolio') renderPortfolio();
+  if (page === 'cart') renderCart();
+  if (page === 'admin') { checkAdmin(); renderAdminDashboard(); }
+  if (page === 'dashboard') { checkAuth(); renderCustomerDashboard(); }
+}
+
+// ═══ AUTH ═══
+function checkAuth() {
+  if (!currentUser) { showPage('login'); return false; }
+  return true;
+}
+function checkAdmin() {
+  if (!currentUser || !currentUser.isAdmin) { showPage('login'); return false; }
+  return true;
+}
+function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  if (!email || !pass) { toast('Please enter your email and password.', 'error'); return; }
+  // Admin
+  if (email === 'admin@solartex.com' && pass === 'admin123') {
+    currentUser = { email, name:'Admin', isAdmin:true };
+    DB.set('currentUser', currentUser);
+    updateNavAuth();
+    showPage('admin');
+    renderAdminDashboard();
+    toast('Welcome back, Admin!', 'success');
+    return;
+  }
+  // Customer
+  const customers = DB.get('customers', []);
+  const users = DB.get('users', []);
+  const user = users.find(u => u.email === email && u.pass === pass);
+  if (user) {
+    currentUser = user;
+    DB.set('currentUser', currentUser);
+    updateNavAuth();
+    showPage('dashboard');
+    renderCustomerDashboard();
+    toast('Welcome back, '+user.first+'!', 'success');
+  } else {
+    toast('Invalid email or password. Try demo@solartex.com / demo123', 'error');
+  }
+}
+
+function handleRegister() {
+  const first = document.getElementById('regFirst').value.trim();
+  const last = document.getElementById('regLast').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const pass = document.getElementById('regPass').value;
+  if (!first || !last || !email || !pass) { toast('Please fill all required fields.', 'error'); return; }
+  const users = DB.get('users', []);
+  if (users.find(u => u.email === email)) { toast('Email already registered.', 'error'); return; }
+  const newUser = { id:'USR-'+Date.now(), first, last, email, phone, pass, joined: new Date().toISOString().split('T')[0] };
+  users.push(newUser);
+  DB.set('users', users);
+  // Add to customers
+  const customers = DB.get('customers', []);
+  customers.push({ id:newUser.id, first, last, email, phone, joined:newUser.joined });
+  DB.set('customers', customers);
+  currentUser = newUser;
+  DB.set('currentUser', currentUser);
+  updateNavAuth();
+  showPage('dashboard');
+  toast('Account created! Welcome to SolarTex, '+first+'!', 'success');
+}
+function handleLogout() {
+  currentUser = null;
+  DB.set('currentUser', null);
+  updateNavAuth();
+  showPage('home');
+  toast('Logged out successfully.', 'success');
+}
+function updateNavAuth() {
+  const navAuth = document.getElementById('navAuth');
+  if (currentUser) {
+    if (currentUser.isAdmin) {
+      navAuth.innerHTML = `<button class="btn-primary" onclick="showPage('admin')">⚙️ Admin</button>`;
+    } else {
+      navAuth.innerHTML = `<button class="btn-outline" onclick="showPage('dashboard')">${currentUser.first || 'Dashboard'}</button>`;
+    }
+  } else {
+    navAuth.innerHTML = `<button class="btn-primary" onclick="showPage('login')">Sign In</button>`;
+  }
+}
+
+// ═══ PRODUCTS ═══
+function renderProducts() {
+  const products = DB.get('products', []);
+  const grid = document.getElementById('productsGrid');
+  if (!products.length) { grid.innerHTML = '<div class="no-data">No products found.</div>'; return; }
+  grid.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="product-img">
+        ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
+        <span style="position:relative;z-index:1;font-size:4rem;">${p.emoji}</span>
+      </div>
+      <div class="product-body">
+        <div class="product-capacity">${p.capacity} · ${p.category}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-warranty">✓ ${p.warranty}</div>
+        <div class="product-price">$${Number(p.price).toLocaleString()} <span>per unit</span></div>
+        <div class="product-footer">
+          <div class="qty-selector">
+            <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+            <span class="qty-val" id="qty-${p.id}">1</span>
+            <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+          </div>
+          <button class="btn-add-cart" onclick="addToCart(${p.id})">🛒 Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function changeQty(id, delta) {
+  const el = document.getElementById('qty-'+id);
+  let val = parseInt(el.textContent) + delta;
+  if (val < 1) val = 1;
+  el.textContent = val;
+}
+
+function addToCart(id) {
+  const products = DB.get('products', []);
+  const product = products.find(p => p.id === id);
+  if (!product) return;
+  const qty = parseInt(document.getElementById('qty-'+id)?.textContent || 1);
+  const existing = cart.find(i => i.id === id);
+  if (existing) { existing.qty += qty; } else { cart.push({...product, qty}); }
+  DB.set('cart', cart);
+  updateCartBadge();
+  toast(`✅ ${qty}× ${product.name} added to cart!`, 'success');
+}
+
+function addBuilderToCart() {
+  const totalBefore = builderState.panelPrice + builderState.inverterPrice + builderState.batteryPrice + builderState.installPrice;
+  const credit = Math.round(totalBefore * 0.3);
+  const total = totalBefore - credit;
+  cart.push({ id:'builder-'+Date.now(), name:`Custom ${builderState.panels}-Panel System (${builderState.inverter} Inverter, ${builderState.battery} Battery)`, price:total, qty:1, emoji:'☀️' });
+  DB.set('cart', cart);
+  updateCartBadge();
+  toast('Custom solar system added to cart!', 'success');
+  showPage('cart');
+}
+
+function updateCartBadge() {
+  const total = cart.reduce((s,i) => s+i.qty, 0);
+  document.getElementById('cartBadge').textContent = total;
+}
+
+// ═══ CART ═══
+function renderCart() {
+  const content = document.getElementById('cartContent');
+  if (!cart.length) {
+    content.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>Your cart is empty.</p><button class="btn-primary mt-16" onclick="showPage('products')">Browse Products</button></div>`;
+    return;
+  }
+  const subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  const tax = Math.round(subtotal * 0.0825);
+  content.innerHTML = `
+  <div class="cart-grid">
+    <div class="cart-items">
+      ${cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-img">${item.emoji || '🔆'}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">$${Number(item.price).toLocaleString()} × ${item.qty} = $${Number(item.price*item.qty).toLocaleString()}</div>
+          </div>
+          <div class="qty-selector">
+            <button class="qty-btn" onclick="cartChangeQty('${item.id}',-1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="cartChangeQty('${item.id}',1)">+</button>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑</button>
+        </div>
+      `).join('')}
+    </div>
+    <div>
+      <div class="cart-summary-card">
+        <h3 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:20px;">Order Summary</h3>
+        <div class="summary-row"><span>Subtotal</span><span>$${subtotal.toLocaleString()}</span></div>
+        <div class="summary-row"><span>Tax (8.25%)</span><span>$${tax.toLocaleString()}</span></div>
+        <div class="summary-row"><span style="font-weight:700;">Total</span><span style="font-weight:700;color:var(--sun);">$${(subtotal+tax).toLocaleString()}</span></div>
+        <button class="btn-primary w-full" style="margin-top:24px;padding:16px;" onclick="checkout()">🔒 Place Order</button>
+        <button class="btn-outline w-full mt-16" style="display:block;" onclick="showPage('products')">Continue Shopping</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function cartChangeQty(id, delta) {
+  const item = cart.find(i => String(i.id) === String(id));
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty < 1) { cart = cart.filter(i => String(i.id) !== String(id)); }
+  DB.set('cart', cart);
+  updateCartBadge();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => String(i.id) !== String(id));
+  DB.set('cart', cart);
+  updateCartBadge();
+  renderCart();
+  toast('Item removed from cart.', 'success');
+}
+
+function checkout() {
+  if (!currentUser) { toast('Please sign in to place an order.', 'error'); showPage('login'); return; }
+  const subtotal = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  const tax = Math.round(subtotal * 0.0825);
+  const orders = DB.get('orders', []);
+  const newOrder = {
+    id: 'ORD-'+Date.now().toString().slice(-6),
+    customer: (currentUser.first||'') + ' ' + (currentUser.last||''),
+    email: currentUser.email,
+    items: cart.map(i => `${i.name} ×${i.qty}`).join(', '),
+    total: subtotal + tax,
+    status: 'Pending',
+    date: new Date().toISOString().split('T')[0],
+  };
+  orders.push(newOrder);
+  DB.set('orders', orders);
+  cart = [];
+  DB.set('cart', cart);
+  updateCartBadge();
+  toast(`🎉 Order ${newOrder.id} placed! We'll contact you shortly.`, 'success');
+  showPage('dashboard');
+  renderCustomerDashboard();
+}
+
+// ═══ CALCULATOR ═══
+function runCalc() {
+  const bill = parseFloat(document.getElementById('calcBill').value);
+  const kwh = parseFloat(document.getElementById('calcKwh').value);
+  const sun = parseFloat(document.getElementById('calcSun').value);
+  const type = document.getElementById('calcType').value;
+  const result = document.getElementById('calcResult');
+  let usage = kwh || (bill / 0.12);
+  if (!usage || usage < 1) { result.classList.remove('show'); return; }
+  const efficiencyFactor = type === 'commercial' ? 0.85 : 0.80;
+  const systemKw = (usage / (sun * 30 * efficiencyFactor));
+  const panels = Math.ceil(systemKw / 0.4);
+  const cost = Math.round(systemKw * 3000);
+  const savings = bill || (usage * 0.12);
+  const payback = (cost * 0.7 / (savings * 12)).toFixed(1);
+  const yr25 = Math.round(savings * 12 * 25 - cost * 0.7);
+  document.getElementById('rSystemSize').textContent = systemKw.toFixed(1);
+  document.getElementById('rPanels').textContent = panels;
+  document.getElementById('rCost').textContent = '$'+cost.toLocaleString();
+  document.getElementById('rSavings').textContent = '$'+Math.round(savings);
+  document.getElementById('rPayback').textContent = payback+' yrs';
+  document.getElementById('r25yr').textContent = '$'+yr25.toLocaleString();
+  result.classList.add('show');
+}
+
+// ═══ SYSTEM BUILDER ═══
+function selectBuilderOption(type, val, price, el) {
+  el.closest('.builder-section').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  builderState[type] = val;
+  builderState[type+'Price'] = price;
+  updateBuilderSummary();
+}
+
+function updateBuilderSummary() {
+  const before = builderState.panelPrice + builderState.inverterPrice + builderState.batteryPrice + builderState.installPrice;
+  const credit = Math.round(before * 0.3);
+  const after = before - credit;
+  document.getElementById('sumPanels').textContent = `${builderState.panels} panels – $${builderState.panelPrice.toLocaleString()}`;
+  document.getElementById('sumInverter').textContent = `${builderState.inverter} – $${builderState.inverterPrice.toLocaleString()}`;
+  document.getElementById('sumBattery').textContent = `${builderState.battery} – $${builderState.batteryPrice.toLocaleString()}`;
+  document.getElementById('sumInstall').textContent = `${builderState.install} – $${builderState.installPrice.toLocaleString()}`;
+  document.getElementById('sumTax').textContent = `−$${credit.toLocaleString()}`;
+  document.getElementById('sumTotal').textContent = `$${after.toLocaleString()}`;
+}
+
+// ═══ APPOINTMENT ═══
+function bookAppointment() {
+  const name = document.getElementById('apptName').value.trim();
+  const email = document.getElementById('apptEmail').value.trim();
+  const phone = document.getElementById('apptPhone').value.trim();
+  const service = document.getElementById('apptService').value;
+  const address = document.getElementById('apptAddress').value.trim();
+  const date = document.getElementById('apptDate').value;
+  const time = document.getElementById('apptTime').value;
+  if (!name||!email||!phone||!service||!address||!date||!time) { toast('Please fill all required fields.', 'error'); return; }
+  const apts = DB.get('appointments', []);
+  apts.push({ id:'APT-'+Date.now().toString().slice(-6), name, email, phone, service, address, date, time, notes: document.getElementById('apptNotes').value, status:'Pending' });
+  DB.set('appointments', apts);
+  toast(`✅ Appointment booked for ${date} at ${time}! We'll confirm via email.`, 'success');
+  document.querySelectorAll('#page-appointment .form-control').forEach(f => f.value='');
+}
+
+// ═══ QUOTE ═══
+function submitQuote() {
+  const name = document.getElementById('quoteName').value.trim();
+  const email = document.getElementById('quoteEmail').value.trim();
+  if (!name||!email) { toast('Please fill your name and email.', 'error'); return; }
+  const msgs = DB.get('messages', []);
+  msgs.push({ id:'MSG-'+Date.now(), name, email, subject:'Quote Request', message: `Type: ${document.getElementById('quoteType').value}, Bill: $${document.getElementById('quoteBill').value}/mo, Address: ${document.getElementById('quoteAddress').value}`, date: new Date().toISOString().split('T')[0], status:'Unread' });
+  DB.set('messages', msgs);
+  toast('✅ Quote request received! We\'ll send your custom quote within 24 hours.', 'success');
+}
+
+// ═══ SUPPORT / CONTACT ═══
+function submitSupport() {
+  const name = document.getElementById('suppName').value.trim();
+  const email = document.getElementById('suppEmail').value.trim();
+  const subj = document.getElementById('suppSubject').value.trim();
+  const msg = document.getElementById('suppMessage').value.trim();
+  if (!name||!email||!subj||!msg) { toast('Please fill all fields.', 'error'); return; }
+  const msgs = DB.get('messages', []);
+  msgs.push({ id:'MSG-'+Date.now(), name, email, subject:subj, message:msg, date:new Date().toISOString().split('T')[0], status:'Unread' });
+  DB.set('messages', msgs);
+  toast('✅ Message sent! We\'ll reply within 24 hours.', 'success');
+  ['suppName','suppEmail','suppSubject','suppMessage'].forEach(id => document.getElementById(id).value='');
+}
+
+function submitContact() {
+  const name = document.getElementById('ctName').value.trim();
+  const email = document.getElementById('ctEmail').value.trim();
+  const subj = document.getElementById('ctSubject').value.trim();
+  const msg = document.getElementById('ctMessage').value.trim();
+  if (!name||!email||!msg) { toast('Please fill name, email, and message.', 'error'); return; }
+  const msgs = DB.get('messages', []);
+  msgs.push({ id:'MSG-'+Date.now(), name, email, subject:subj, message:msg, date:new Date().toISOString().split('T')[0], status:'Unread' });
+  DB.set('messages', msgs);
+  toast('✅ Message sent! We\'ll be in touch soon.', 'success');
+  ['ctName','ctEmail','ctSubject','ctMessage'].forEach(id => document.getElementById(id).value='');
+}
+
+// ═══ PORTFOLIO ═══
+function renderPortfolio() {
+  const items = DB.get('portfolio', []);
+  const grid = document.getElementById('portfolioGrid');
+  grid.innerHTML = items.map(p => `
+    <div class="portfolio-card">
+      <div class="portfolio-img">${p.emoji}</div>
+      <div class="portfolio-body">
+        <div class="portfolio-title">${p.title}</div>
+        <div class="portfolio-details">System Size: ${p.kw} · ${p.panels} Panels<br>Installation Cost: $${Number(p.cost).toLocaleString()}</div>
+        <div class="portfolio-stars">${'★'.repeat(p.stars)}</div>
+        <div class="portfolio-review">"${p.review}" — ${p.reviewer}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══ CUSTOMER DASHBOARD ═══
+function renderCustomerDashboard() {
+  if (!currentUser) return;
+  document.getElementById('dashWelcome').textContent = `Welcome, ${currentUser.first || currentUser.name || 'Customer'}`;
+  // Orders
+  const orders = DB.get('orders', []).filter(o => o.email === currentUser.email);
+  const ordersEl = document.getElementById('customerOrders');
+  ordersEl.innerHTML = orders.length ? orders.map(o => `
+    <div class="order-row">
+      <div><div class="order-id">${o.id}</div><div style="font-size:0.82rem;color:var(--gray-500);margin-top:4px;">${o.items}</div></div>
+      <div style="text-align:right;">
+        <div style="font-weight:700;">$${Number(o.total).toLocaleString()}</div>
+        <div class="order-status ${statusClass(o.status)}" style="margin-top:6px;">${o.status}</div>
+        <div style="font-size:0.78rem;color:var(--gray-500);margin-top:4px;">${o.date}</div>
+      </div>
+    </div>
+  `).join('') : '<div class="no-data">No orders yet. <a style="color:var(--sun);cursor:pointer;" onclick="showPage(\'products\')">Browse products</a></div>';
+  // Appointments
+  const appts = DB.get('appointments', []).filter(a => a.email === currentUser.email);
+  const apptsEl = document.getElementById('customerAppts');
+  apptsEl.innerHTML = appts.length ? appts.map(a => `
+    <div class="appt-row"><strong>${a.service}</strong> · ${a.date} · ${a.time}<br><span style="color:var(--gray-300);font-size:0.88rem;">${a.address}</span> <span class="order-status ${statusClass(a.status)}" style="float:right;">${a.status}</span></div>
+  `).join('') : '<div class="no-data">No appointments yet.</div>';
+  // Profile
+  document.getElementById('profFirst').value = currentUser.first || '';
+  document.getElementById('profLast').value = currentUser.last || '';
+  document.getElementById('profEmail').value = currentUser.email || '';
+  document.getElementById('profPhone').value = currentUser.phone || '';
+}
+
+function saveProfile() {
+  currentUser.first = document.getElementById('profFirst').value.trim();
+  currentUser.last = document.getElementById('profLast').value.trim();
+  currentUser.phone = document.getElementById('profPhone').value.trim();
+  DB.set('currentUser', currentUser);
+  toast('Profile updated!', 'success');
+}
+
+function showDashPanel(id, el) {
+  document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.dash-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('dash-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ═══ ADMIN DASHBOARD ═══
+function renderAdminDashboard() {
+  const orders = DB.get('orders', []);
+  const customers = DB.get('customers', []);
+  const products = DB.get('products', []);
+  const appointments = DB.get('appointments', []);
+  const messages = DB.get('messages', []);
+  const revenue = orders.reduce((s,o) => s + Number(o.total), 0);
+  const unread = messages.filter(m => m.status === 'Unread').length;
+
+  document.getElementById('adminStats').innerHTML = `
+    <div class="admin-stat"><div class="admin-stat-num">$${revenue.toLocaleString()}</div><div class="admin-stat-label">Total Revenue</div><div class="admin-stat-change">↑ All orders</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${orders.length}</div><div class="admin-stat-label">Total Orders</div><div class="admin-stat-change">↑ Growing</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${customers.length}</div><div class="admin-stat-label">Customers</div><div class="admin-stat-change">Active accounts</div></div>
+    <div class="admin-stat"><div class="admin-stat-num">${unread}</div><div class="admin-stat-label">Unread Messages</div><div class="admin-stat-change" style="color:${unread?'var(--sun)':'var(--grass)'};">${unread?'Need attention':'All clear'}</div></div>
+  `;
+
+  // Revenue chart
+  const months = ['Oct','Nov','Dec','Jan','Feb','Mar'];
+  const values = [38000, 52000, 71000, 44000, 68000, 85000];
+  const maxVal = Math.max(...values);
+  document.getElementById('revenueChart').innerHTML = months.map((m,i) => `
+    <div class="chart-bar-col">
+      <div class="chart-bar" style="height:${Math.round((values[i]/maxVal)*130)}px;"></div>
+      <div class="chart-label">${m}</div>
+    </div>
+  `).join('');
+
+  // Recent orders
+  document.getElementById('recentOrdersTable').innerHTML = orders.slice(-5).reverse().map(o => `
+    <tr><td><span style="color:var(--sun);font-weight:700;">${o.id}</span></td><td>${o.customer}</td><td>$${Number(o.total).toLocaleString()}</td><td><span class="order-status ${statusClass(o.status)}">${o.status}</span></td><td>${o.date}</td></tr>
+  `).join('');
+
+  renderAdminProducts();
+  renderAdminOrders();
+  renderAdminAppointments();
+  renderAdminMessages();
+  renderAdminCustomers();
+}
+
+function renderAdminProducts() {
+  const products = DB.get('products', []);
+  document.getElementById('adminProductsTable').innerHTML = products.map(p => `
+    <tr>
+      <td><strong>${p.emoji} ${p.name}</strong></td>
+      <td>${p.capacity}</td>
+      <td>$${Number(p.price).toLocaleString()}</td>
+      <td>${p.category}</td>
+      <td>
+        <button class="action-btn" onclick="openProductModal(${p.id})">Edit</button>
+        <button class="action-btn danger" onclick="deleteProduct(${p.id})">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminOrders() {
+  const orders = DB.get('orders', []);
+  document.getElementById('adminOrdersTable').innerHTML = orders.map(o => `
+    <tr>
+      <td><span style="color:var(--sun);font-weight:700;">${o.id}</span></td>
+      <td>${o.customer}</td>
+      <td style="max-width:200px;font-size:0.8rem;color:var(--gray-300);">${o.items}</td>
+      <td>$${Number(o.total).toLocaleString()}</td>
+      <td><select onchange="updateOrderStatus('${o.id}',this.value)" style="background:var(--sky-mid);border:1px solid var(--border);color:var(--white);padding:4px 8px;border-radius:6px;font-size:0.8rem;outline:none;">
+        ${['Pending','Confirmed','Installing','Completed'].map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}
+      </select></td>
+      <td>${o.date}</td>
+      <td><button class="action-btn danger" onclick="deleteOrder('${o.id}')">Delete</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminAppointments() {
+  const apts = DB.get('appointments', []);
+  document.getElementById('adminApptsTable').innerHTML = apts.map(a => `
+    <tr>
+      <td><strong>${a.name}</strong><br><span style="font-size:0.78rem;color:var(--gray-500);">${a.email}</span></td>
+      <td>${a.service}</td>
+      <td>${a.date}<br><span style="font-size:0.8rem;color:var(--gray-300);">${a.time}</span></td>
+      <td>${a.phone}</td>
+      <td><select onchange="updateApptStatus('${a.id}',this.value)" style="background:var(--sky-mid);border:1px solid var(--border);color:var(--white);padding:4px 8px;border-radius:6px;font-size:0.8rem;outline:none;">
+        ${['Pending','Confirmed','Completed','Cancelled'].map(s=>`<option ${s===a.status?'selected':''}>${s}</option>`).join('')}
+      </select></td>
+      <td><button class="action-btn danger" onclick="deleteAppt('${a.id}')">Delete</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminMessages() {
+  const msgs = DB.get('messages', []);
+  document.getElementById('adminMsgsTable').innerHTML = msgs.map(m => `
+    <tr style="${m.status==='Unread'?'background:rgba(245,166,35,0.03)':''}">
+      <td><strong>${m.name}</strong><br><span style="font-size:0.78rem;color:var(--gray-500);">${m.email}</span></td>
+      <td>${m.subject}</td>
+      <td style="max-width:250px;font-size:0.85rem;color:var(--gray-300);">${m.message}</td>
+      <td>${m.date}</td>
+      <td><span class="badge ${m.status==='Unread'?'status-pending':'status-completed'}">${m.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+function renderAdminCustomers() {
+  const customers = DB.get('customers', []);
+  const orders = DB.get('orders', []);
+  document.getElementById('adminCustomersTable').innerHTML = customers.map(c => `
+    <tr>
+      <td><strong>${c.first} ${c.last}</strong></td>
+      <td>${c.email}</td>
+      <td>${c.phone||'—'}</td>
+      <td>${orders.filter(o=>o.email===c.email).length}</td>
+      <td>${c.joined||'—'}</td>
+      <td><button class="action-btn danger" onclick="deleteCustomer('${c.id}')">Remove</button></td>
+    </tr>
+  `).join('');
+}
+
+function showAdminPanel(id, el) {
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('admin-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ═══ ADMIN CRUD ═══
+let editingProductId = null;
+function openProductModal(id) {
+  document.getElementById('productModal').classList.add('open');
+  if (id) {
+    const products = DB.get('products', []);
+    const p = products.find(x => x.id === id);
+    document.getElementById('productModalTitle').textContent = 'Edit Product';
+    document.getElementById('pName').value = p.name;
+    document.getElementById('pCapacity').value = p.capacity;
+    document.getElementById('pPrice').value = p.price;
+    document.getElementById('pCategory').value = p.category;
+    document.getElementById('pDesc').value = p.desc;
+    document.getElementById('pWarranty').value = p.warranty;
+    document.getElementById('pEmoji').value = p.emoji;
+    document.getElementById('pEditId').value = id;
+    editingProductId = id;
+  } else {
+    document.getElementById('productModalTitle').textContent = 'Add Product';
+    ['pName','pCapacity','pPrice','pDesc','pWarranty'].forEach(f => document.getElementById(f).value='');
+    document.getElementById('pEmoji').value='🔆';
+    document.getElementById('pEditId').value='';
+    editingProductId = null;
+  }
+}
+
+function saveProduct() {
+  const name = document.getElementById('pName').value.trim();
+  const capacity = document.getElementById('pCapacity').value.trim();
+  const price = parseFloat(document.getElementById('pPrice').value);
+  const desc = document.getElementById('pDesc').value.trim();
+  if (!name||!capacity||!price||!desc) { toast('Please fill all required fields.', 'error'); return; }
+  const products = DB.get('products', []);
+  if (editingProductId) {
+    const idx = products.findIndex(p => p.id === editingProductId);
+    if (idx !== -1) {
+      products[idx] = { ...products[idx], name, capacity, price, category:document.getElementById('pCategory').value, desc, warranty:document.getElementById('pWarranty').value, emoji:document.getElementById('pEmoji').value };
+    }
+  } else {
+    products.push({ id: Date.now(), name, capacity, price, category:document.getElementById('pCategory').value, desc, warranty:document.getElementById('pWarranty').value, emoji:document.getElementById('pEmoji').value, badge:null });
+  }
+  DB.set('products', products);
+  closeModal('productModal');
+  renderAdminProducts();
+  toast(editingProductId ? 'Product updated!' : 'Product added!', 'success');
+}
+
+function deleteProduct(id) {
+  if (!confirm('Delete this product?')) return;
+  DB.set('products', DB.get('products', []).filter(p => p.id !== id));
+  renderAdminProducts();
+  toast('Product deleted.', 'success');
+}
+
+function updateOrderStatus(id, status) {
+  const orders = DB.get('orders', []);
+  const o = orders.find(x => x.id === id);
+  if (o) o.status = status;
+  DB.set('orders', orders);
+  toast('Order status updated!', 'success');
+}
+
+function deleteOrder(id) {
+  if (!confirm('Delete this order?')) return;
+  DB.set('orders', DB.get('orders', []).filter(o => o.id !== id));
+  renderAdminOrders();
+  toast('Order deleted.', 'success');
+}
+
+function updateApptStatus(id, status) {
+  const apts = DB.get('appointments', []);
+  const a = apts.find(x => x.id === id);
+  if (a) a.status = status;
+  DB.set('appointments', apts);
+  toast('Appointment status updated!', 'success');
+}
+
+function deleteAppt(id) {
+  if (!confirm('Delete this appointment?')) return;
+  DB.set('appointments', DB.get('appointments', []).filter(a => a.id !== id));
+  renderAdminAppointments();
+  toast('Appointment deleted.', 'success');
+}
+
+function deleteCustomer(id) {
+  if (!confirm('Remove this customer?')) return;
+  DB.set('customers', DB.get('customers', []).filter(c => c.id !== id));
+  renderAdminCustomers();
+  toast('Customer removed.', 'success');
+}
+
+// ═══ UTILS ═══
+function statusClass(s) {
+  const map = { 'Pending':'status-pending', 'Confirmed':'status-confirmed', 'Installing':'status-installing', 'Completed':'status-completed', 'Cancelled':'status-pending' };
+  return map[s] || '';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+function toast(msg, type='success') {
+  const c = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast '+type;
+  t.innerHTML = `<span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.animation='toastIn 0.3s reverse'; setTimeout(()=>t.remove(),300); }, 4000);
+}
+
+function toggleFaq(el) {
+  const ans = el.nextElementSibling;
+  const wasOpen = ans.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q span:last-child').forEach(s => s.textContent='+');
+  if (!wasOpen) { ans.classList.add('open'); el.querySelector('span:last-child').textContent='−'; }
+}
+
+// ═══ INIT ═══
+initData();
+updateCartBadge();
+updateBuilderSummary();
+
+// Restore session
+const saved = DB.get('currentUser', null);
+if (saved) { currentUser = saved; updateNavAuth(); }
+
+// Demo login shortcut
+DB.get('users', []).length === 0 && (() => {
+  const users = DB.get('users', []);
+  users.push({ id:'USR-DEMO', first:'Demo', last:'Customer', email:'demo@solartex.com', phone:'713-555-0001', pass:'demo123', joined:'2025-01-01' });
+  DB.set('users', users);
+})();
+</script>
+</body>
+</html>
